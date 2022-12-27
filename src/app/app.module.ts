@@ -8,7 +8,7 @@ import { NoPageFoundComponent } from './no-page-found/no-page-found.component';
 import { AuthModule } from './auth/auth.module';
 import { PagesModule } from './pages/pages.module';
 import { RouterModule } from '@angular/router';
-
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -22,7 +22,10 @@ import { RouterModule } from '@angular/router';
     RouterModule,
     AuthModule,
     PagesModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]
