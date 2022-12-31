@@ -9,6 +9,7 @@ import { ProductosComponent } from './matenimiento/productos/productos.component
 import { PagesComponent } from './pages.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -23,9 +24,11 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     PagesRoutingModule,
     SharedModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  exports:[
+  exports: [
     PrincipalComponent,
     UsuariosComponent,
     CategoriasComponent,

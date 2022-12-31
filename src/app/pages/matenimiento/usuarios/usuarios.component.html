@@ -1,1 +1,70 @@
-<p>usuarios works!</p>
+<div class="row d-flex justify-content-center">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header bg-info">
+        <h4 class="m-b-0 text-white">Formulario de creacion de usuarios</h4>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="registerForm" (ngSubmit)="registrarUsuario()">
+          <div class="form-body">
+            <h3 class="card-title">Usuario</h3>
+            <hr>
+            <div class="form-group"
+              [ngClass]="{'has-success':validarCampo('nombre'),'has-danger':campoIncorrecto('nombre')}"><!--mejorar -->
+              <label class="control-label">Nombre</label>
+              <input type="text" id="firstName" class="form-control" placeholder="nombre" formControlName="nombre"
+                [ngClass]="{'form-control-danger':campoIncorrecto('nombre')}">
+              <small class="form-control-feedback" *ngIf="campoIncorrecto('nombre')">El nombre no debe estar vacio
+              </small>
+            </div>
+            <div class="form-group"
+              [ngClass]="{'has-success':validarCampo('email'),'has-danger':campoIncorrecto('email')}">
+              <label class="control-label">Email</label>
+              <input type="text" id="firstName" class="form-control" placeholder="email" formControlName="email"
+                [ngClass]="{'form-control-danger':campoIncorrecto('email')}">
+              <small class="form-control-feedback" *ngIf="campoIncorrecto('email')">El email es obligatorio</small>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Category</label>
+              <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1" formControlName="rol" >
+                  <option value="VENTAS_ROL">Ventas</option>
+                  <option value="ALMACEN_ROL">Almacen</option>
+                  <option value="ADMIN_ROL">Admin</option>
+                  <option value="DEV_ROL">Desarrollador</option>
+              </select>
+          </div>
+            <div class="form-group"
+              [ngClass]="{'has-success':validarCampo('password'),'has-danger':campoIncorrecto('password')}">
+              <label class="control-label">Password</label>
+              <input type="text" id="firstName" class="form-control" placeholder="pasword" formControlName="password"
+                [ngClass]="{'form-control-danger':campoIncorrecto('password')}">
+              <small class="form-control-feedback" *ngIf="campoIncorrecto('password')"> This is inline help </small>
+
+            </div>
+            <div class="form-group"
+              [ngClass]="{'has-success':!passValidas(),'has-danger':passValidas()}">
+              <label class="control-label">Repetir Password</label>
+              <input type="text" id="firstName" class="form-control" placeholder="repetir password"
+                formControlName="password2" [ngClass]="{'form-control-danger':passValidas()}">
+              <small class="form-control-feedback" *ngIf="passValidas()">El password no coincide </small><!---->
+            </div>
+            <div class="form-group"
+              [ngClass]="{'has-success':validarCampo('telefono'),'has-danger':campoIncorrecto('telefono')}">
+              <label class="control-label">Telefono</label>
+              <input type="text" id="firstName" class="form-control" placeholder="telefono" formControlName="telefono"
+                [ngClass]="{'form-control-danger':campoIncorrecto('telefono')}">
+              <small class="form-control-feedback" *ngIf="campoIncorrecto('password2')"> This is inline help </small>
+            </div>
+
+          </div>
+          <div class="form-actions text-center">
+            <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Guardar</button>
+          </div>
+          <pre>
+           {{verestado() | json}}
+          </pre>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
