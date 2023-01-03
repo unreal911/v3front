@@ -5,6 +5,7 @@ import { catchError, map, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { login } from '../interfaces/login.interfase';
 import { registerInterface } from '../interfaces/register.interface';
+import { ListarUsuarios } from '../interfaces/rpt.listarUsuarios';
 import { Login } from '../interfaces/rpt.login.interface';
 const api_url = environment.base_url
 @Injectable({
@@ -26,6 +27,10 @@ export class UsuarioService {
         'x-token': this.token
       }
     }
+  }
+  listarUsuarios(desde: number = 0, limite: number = 5) {
+    const url = `${api_url}/usuario/${desde}/${limite}`
+    return this.http.get<ListarUsuarios>(url, this.headers)
   }
   crearusuario(body: registerInterface) {
     const url = `${api_url}/usuario`

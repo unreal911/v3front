@@ -26,13 +26,14 @@
             </div>
             <div class="form-group">
               <label class="control-label">Category</label>
-              <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1" formControlName="rol" >
-                  <option value="VENTAS_ROL">Ventas</option>
-                  <option value="ALMACEN_ROL">Almacen</option>
-                  <option value="ADMIN_ROL">Admin</option>
-                  <option value="DEV_ROL">Desarrollador</option>
+              <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1"
+                formControlName="rol">
+                <option value="VENTAS_ROL">Ventas</option>
+                <option value="ALMACEN_ROL">Almacen</option>
+                <option value="ADMIN_ROL">Admin</option>
+                <option value="DEV_ROL">Desarrollador</option>
               </select>
-          </div>
+            </div>
             <div class="form-group"
               [ngClass]="{'has-success':validarCampo('password'),'has-danger':campoIncorrecto('password')}">
               <label class="control-label">Password</label>
@@ -41,8 +42,7 @@
               <small class="form-control-feedback" *ngIf="campoIncorrecto('password')"> This is inline help </small>
 
             </div>
-            <div class="form-group"
-              [ngClass]="{'has-success':!passValidas(),'has-danger':passValidas()}">
+            <div class="form-group" [ngClass]="{'has-success':!passValidas(),'has-danger':passValidas()}">
               <label class="control-label">Repetir Password</label>
               <input type="text" id="firstName" class="form-control" placeholder="repetir password"
                 formControlName="password2" [ngClass]="{'form-control-danger':passValidas()}">
@@ -61,7 +61,6 @@
             <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Guardar</button>
           </div>
           <pre>
-           {{verestado() | json}}
           </pre>
         </form>
       </div>

@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { NgClass } from '@angular/common';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { subscribeOn } from 'rxjs';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+
 @Component({
-  selector: 'app-usuarios',
-  templateUrl: './usuarios.component.html',
-  styleUrls: ['./usuarios.component.css']
+  selector: 'app-crear',
+  templateUrl: './crear.component.html',
+  styleUrls: ['./crear.component.css']
 })
-export class UsuariosComponent implements OnInit {
+export class CrearComponent implements OnInit {
   registerForm: FormGroup = new FormGroup({
     nombre: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
@@ -19,8 +18,10 @@ export class UsuariosComponent implements OnInit {
     rol: new FormControl('VENTAS_ROL', Validators.required)
   })
   estado: any
-
   constructor(private usuarioService: UsuarioService) { }
+
+  ngOnInit(): void {
+  }
   registrarUsuario() {
     if (this.registerForm.invalid) {
       console.log('No hay submited')
@@ -39,14 +40,7 @@ export class UsuariosComponent implements OnInit {
             icon: 'success',
             confirmButtonText: 'Ok!'
           })
-          this.registerForm.setValue({
-            nombre:'',
-            email:'',
-            password:'',
-            password2:'',
-            telefono:'',
-            rol:'VENTAS_ROL'
-          })
+            this.registerForm.reset()
         },
         error(e) {
           Swal.fire({
@@ -60,9 +54,6 @@ export class UsuariosComponent implements OnInit {
         complete() { },
       }
     )
-
-  }
-  ngOnInit(): void {
 
   }
   passmsg() {
@@ -105,5 +96,4 @@ export class UsuariosComponent implements OnInit {
       valido: this.registerForm.get('password2')?.valid
     }
   }
-
 }
