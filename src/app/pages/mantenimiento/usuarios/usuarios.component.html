@@ -4,7 +4,7 @@
     <h4 class="card-title text-primary">Usuarios</h4>
   </div>
 </div>
-<div class="alert alert-primary text-center" role="alert">
+<div class="alert alert-primary text-center" role="alert" *ngIf="cargando">
   <strong>
     <h4 class="alert-heading">Cargando</h4>
     <i class="fa fa-spin fa-refresh fa-2x"></i>
@@ -33,35 +33,44 @@
               {{usuario.img.url}}
             </td>
             <td>
-              <div class="d-flex">
-                <input type="text" value="{{usuario.nombre}}" class="form-control mr-1">
-                <button type="button" class="btn-primary btn-sm mr-1"><i class="mdi mdi-check"></i></button>
+              <p (click)="clickNom(i,'nombre',usuario)" *ngIf="!nom[i]">{{usuario.nombre}}</p>
+              <div class="d-flex" *ngIf="nom[i]">
+                <input type="text" [(ngModel)]="usuario.nombre" class="form-control mr-1">
+                <button type="button" class="btn-primary btn-sm mr-1" (click)="clickSave(i,'nombre',usuario)"><i
+                    class="mdi mdi-check"></i></button>
               </div>
             </td>
             <td>
-              <div class="d-flex">
-                <input type="text" value="{{usuario.email}}" class="form-control mr-1">
-                <button type="button" class="btn-primary btn-sm mr-1"><i class="mdi mdi-check"></i></button>
+              <p (click)="clickNom(i,'email',usuario)" *ngIf="!email[i]">{{usuario.email}}</p>
+              <div class="d-flex" *ngIf="email[i]">
+                <input type="text" [(ngModel)]="usuario.email" class="form-control mr-1">
+                <button type="button" class="btn-primary btn-sm mr-1" (click)="clickSave(i,'email',usuario)"><i
+                    class="mdi mdi-check"></i></button>
               </div>
             </td>
             <td>
-              <select [(ngModel)]="usuario.rol" class="form-control">
+              <select [(ngModel)]="usuario.rol" class="form-control" (change)="cambiarRol(usuario)">
                 <option value="ADMIN_ROL">ADMIN ROL</option>
                 <option value="VENTAS_ROL">VENTAS ROL</option>
                 <option value="USER_ROL">USUARIO ROL</option>
                 <option value="DEV_ROL">DEV ROL</option>
               </select>
             </td>
-            <td>{{usuario.telefono}}</td>
             <td>
-              <select [(ngModel)]="usuario.estado" class="form-control">
+              <p (click)="clickNom(i,'telefono',usuario)" *ngIf="!telefono[i]">{{usuario.telefono}}</p>
+              <div class="d-flex" *ngIf="telefono[i]">
+                <input type="text" value="{{usuario.telefono}}" class="form-control mr-1">
+                <button type="button" class="btn-primary btn-sm mr-1" (click)="clickSave(i,'telefono',usuario)"><i
+                    class="mdi mdi-check"></i></button>
+              </div>
+            </td>
+            <td>
+              <select [(ngModel)]="usuario.estado" class="form-control" (change)="cambiarEstado(usuario)">
                 <option value="true">ACTIVO</option>
                 <option value="false">INACTIVO</option>
               </select>
             </td>
-            <td class="text-nowrap">
-              <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i
-                  class="fa fa-pencil text-inverse m-r-10"></i> </a>
+            <td class="text-nowrap text-center">
               <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i>
               </a>
             </td>
@@ -70,8 +79,11 @@
       </table>
     </div>
     <div class="">
-      <button type="button" class="btn btn-outline-primary mr-3">atras</button>
-      <button type="button" class="btn btn-outline-primary">siguiente</button>
+      <button type="button" class="btn btn-outline-primary mr-3" (click)="cambiarPagina(-5)">atras</button>
+      <button type="button" class="btn btn-outline-primary" (click)="cambiarPagina(5)">siguiente</button>
     </div>
   </div>
 </div>
+ <pre>
+
+ </pre>

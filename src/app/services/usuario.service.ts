@@ -5,7 +5,7 @@ import { catchError, map, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { login } from '../interfaces/login.interfase';
 import { registerInterface } from '../interfaces/register.interface';
-import { ListarUsuarios } from '../interfaces/rpt.listarUsuarios';
+import { ListarUsuarios, Usuario } from '../interfaces/rpt.listarUsuarios';
 import { Login } from '../interfaces/rpt.login.interface';
 const api_url = environment.base_url
 @Injectable({
@@ -27,6 +27,20 @@ export class UsuarioService {
         'x-token': this.token
       }
     }
+  }
+
+  cambiaRol(usuario:Usuario){
+    const url = `${api_url}/usuario/actualizarRol/${usuario.uid}`
+   return this.http.put(url,{rol:usuario.rol},this.headers)
+  }
+  cambiarEstado(usuario:Usuario){
+    const url = `${api_url}/usuario/actualizarEstado/${usuario.uid}`
+    return this.http.put(url,{estado:usuario.estado},this.headers)
+  }
+  actulizarCampo(uid: string, campo:any) {
+    const url = `${api_url}/usuario/${uid}`
+    return this.http.put(url,campo,this.headers)
+
   }
   listarUsuarios(desde: number = 0, limite: number = 5) {
     const url = `${api_url}/usuario/${desde}/${limite}`
