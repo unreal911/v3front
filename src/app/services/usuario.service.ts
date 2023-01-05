@@ -28,18 +28,21 @@ export class UsuarioService {
       }
     }
   }
-
-  cambiaRol(usuario:Usuario){
-    const url = `${api_url}/usuario/actualizarRol/${usuario.uid}`
-   return this.http.put(url,{rol:usuario.rol},this.headers)
-  }
-  cambiarEstado(usuario:Usuario){
-    const url = `${api_url}/usuario/actualizarEstado/${usuario.uid}`
-    return this.http.put(url,{estado:usuario.estado},this.headers)
-  }
-  actulizarCampo(uid: string, campo:any) {
+  eliminar(uid: string) {
     const url = `${api_url}/usuario/${uid}`
-    return this.http.put(url,campo,this.headers)
+    return this.http.delete(url, this.headers)
+  }
+  cambiaRol(usuario: Usuario) {
+    const url = `${api_url}/usuario/actualizarRol/${usuario.uid}`
+    return this.http.put(url, { rol: usuario.rol }, this.headers)
+  }
+  cambiarEstado(usuario: Usuario) {
+    const url = `${api_url}/usuario/actualizarEstado/${usuario.uid}`
+    return this.http.put(url, { estado: usuario.estado }, this.headers)
+  }
+  actulizarCampo(uid: string, campo: any) {
+    const url = `${api_url}/usuario/${uid}`
+    return this.http.put(url, campo, this.headers)
 
   }
   listarUsuarios(desde: number = 0, limite: number = 5) {

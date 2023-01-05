@@ -37,6 +37,45 @@ export class UsuariosComponent implements OnInit {
   ngOnInit(): void {
     this.listarUsuarios()
   }
+  eliminar(usuario: Usuario) {
+    Swal.fire({
+      title: 'Estas seguro ?',
+      text: `se eliminara a ${usuario.email}`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if (usuario.uid == this.usuarioService.usuario.uid) {
+
+          Swal.fire(
+            'Cuidado!',
+            'No te puedes eliminar a ti mismo.',
+            'info'
+          )
+          return;
+        }
+        this.usuarioService.eliminar(usuario.uid).subscribe(
+          {
+            next: (r) => {
+              console.log(r)
+              this.listarUsuarios()
+            },
+            error: (e) => {
+              console.log(e)
+            }
+          }
+        )
+        Swal.fire(
+          'Elimiado!',
+          'El suaurio fue eliminado.',
+          'success'
+        )
+      }
+    })
+  }
   cambiarEstado(usuario: Usuario) {
     this.usuarioService.cambiarEstado(usuario).subscribe(
       {

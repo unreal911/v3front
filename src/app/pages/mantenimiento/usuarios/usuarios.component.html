@@ -12,7 +12,11 @@
   </strong>
 </div>
 <div class="card">
+  <div class="d-flex justify-content-end p-3">
+    <button type="button" class="btn btn-primary" [routerLink]="['../crearUsuario']">Crear</button>
+  </div>
   <div class="card-body">
+
     <div class="table-responsive">
       <table class="table table-striped">
         <thead>
@@ -29,8 +33,8 @@
         <tbody>
           <tr *ngFor="let usuario of usuarios;let i=index">
             <td>
-              <img [src]="usuario.img.url" alt="" class="img-circle" width="100">
-              {{usuario.img.url}}
+              <i *ngIf="!usuario.img.url || usuario.img.url=='nodefinido'" class="fa fa-file-image-o fa-2x"></i>
+              <img [src]="usuario.img.url" alt="" class="img-circle" width="100" *ngIf="usuario.img.url">
             </td>
             <td>
               <p (click)="clickNom(i,'nombre',usuario)" *ngIf="!nom[i]">{{usuario.nombre}}</p>
@@ -59,7 +63,7 @@
             <td>
               <p (click)="clickNom(i,'telefono',usuario)" *ngIf="!telefono[i]">{{usuario.telefono}}</p>
               <div class="d-flex" *ngIf="telefono[i]">
-                <input type="text" value="{{usuario.telefono}}" class="form-control mr-1">
+                <input type="text" [(ngModel)]="usuario.telefono" class="form-control mr-1">
                 <button type="button" class="btn-primary btn-sm mr-1" (click)="clickSave(i,'telefono',usuario)"><i
                     class="mdi mdi-check"></i></button>
               </div>
@@ -71,7 +75,8 @@
               </select>
             </td>
             <td class="text-nowrap text-center">
-              <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i>
+              <a data-toggle="tooltip" data-original-title="Close" (click)="eliminar(usuario)"> <i
+                  class="fa fa-close text-danger"></i>
               </a>
             </td>
           </tr>
@@ -84,6 +89,6 @@
     </div>
   </div>
 </div>
- <pre>
+<pre>
 
  </pre>
