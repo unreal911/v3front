@@ -2,19 +2,34 @@
   <div class="col-lg-5 col-xlg-4">
     <div class="card">
       <div class="card-body little-profile text-center">
-        
-        <div class="pro-img m-t-20"><img src="../assets/images/users/4.jpg" alt="user" class="shadow"></div>
-
-        <h3 class="m-b-0">{{usuario.nombre}}</h3>
-        <h6 class="text-muted">{{usuario.rol}}</h6>
+        <div class="image-upload">
+          <label for="file-input">
+            <img *ngIf="!imgTemp" src="https://www.chanchao.com.tw/images/default.jpg" class="img-circle" width="150" />
+            <img *ngIf="imgTemp" [src]="imgTemp" class="img-circle" width="150" />
+          </label>
+          <input type="file" name="" id="file-input" (change)="cambiarImagen($event)" />
+        </div>
+        <h3 style="cursor: pointer;"  class="m-b-0" *ngIf="!campoNombre" (click)="mostrarCampo(usuario,'nombre')">{{usuario.nombre}}</h3>
+        <div class="input-form">
+          <div class="input-group" *ngIf="campoNombre">
+            <input type="text" class="form-control" [(ngModel)]="usuario.nombre">
+            <span class="input-group-btn">
+              <button class="btn btn-primary" type="button" (click)="guardarCampo(usuario,'nombre')"><i
+                  class="mdi mdi-check"></i></button>
+            </span>
+          </div>
+        </div>
+        <h6 class="text-muted">
+          <span class="badge badge-primary">{{usuario.rol}}</span>
+        </h6>
       </div>
 
       <div class="message-box contact-box">
         <div class="message-widget text-center">
           <a>
             <div class="mail-contnet">
-              <h4>Email</h4> <span class="mail-desc" *ngIf="!campoEmail"
-                (click)="mostrarCampo(usuario,'email')" style="cursor: pointer;" >{{usuario.email}}</span>
+              <h4>Email</h4> <span class="mail-desc" *ngIf="!campoEmail" (click)="mostrarCampo(usuario,'email')"
+                style="cursor: pointer;">{{usuario.email}}</span>
               <div class="input-form">
                 <div class="input-group" *ngIf="campoEmail">
                   <input type="text" class="form-control" [(ngModel)]="usuario.email">

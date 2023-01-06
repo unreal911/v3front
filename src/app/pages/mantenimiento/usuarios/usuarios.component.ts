@@ -80,7 +80,10 @@ export class UsuariosComponent implements OnInit {
     this.usuarioService.cambiarEstado(usuario).subscribe(
       {
         next: (r) => { console.log(r) },
-        error: (e) => { console.log(e) }
+        error: (e) => {
+          console.log(e)
+          Swal.fire('Error', e.error.msg, 'error')
+        }
       }
     )
   }
@@ -88,7 +91,10 @@ export class UsuariosComponent implements OnInit {
     this.usuarioService.cambiaRol(usuario).subscribe(
       {
         next: (r) => { console.log(r) },
-        error: (e) => { console.log(e) }
+        error: (e) => {
+          console.log(e)
+          Swal.fire('Error', e.error.msg, 'error')
+        }
       }
     )
   }
@@ -114,7 +120,13 @@ export class UsuariosComponent implements OnInit {
       this.usuarioService.actulizarCampo(usuario.uid, { nombre: usuario.nombre }).subscribe(
         {
           next: (r) => { console.log(r) },
-          error: (e) => { console.log(e) }
+          error: (e) => {
+            if (!e.error.errors) {
+              Swal.fire('Error', e.error.msg, 'error')
+            } else {
+              Swal.fire('Error', e.error.errors[0].msg, 'error')
+            }
+          }
         },
       )
     } else if (campo == 'email') {
@@ -125,7 +137,13 @@ export class UsuariosComponent implements OnInit {
       this.usuarioService.actulizarCampo(usuario.uid, { email: usuario.email }).subscribe(
         {
           next: (r) => { console.log(r) },
-          error: (e) => { console.log(e) }
+          error: (e) => {
+            if (!e.error.errors) {
+              Swal.fire('Error', e.error.msg, 'error')
+            } else {
+              Swal.fire('Error', e.error.errors[0].msg, 'error')
+            }
+          }
         },
       )
     } else if (campo == 'telefono') {
@@ -136,7 +154,13 @@ export class UsuariosComponent implements OnInit {
       this.usuarioService.actulizarCampo(usuario.uid, { telefono: usuario.telefono }).subscribe(
         {
           next: (r) => { console.log(r) },
-          error: (e) => { console.log(e) }
+          error: (e) => {
+            if (!e.error.errors) {
+              Swal.fire('Error', e.error.msg, 'error')
+            } else {
+              Swal.fire('Error', e.error.errors[0].msg, 'error')
+            }
+          }
         },
       )
     }
