@@ -18,12 +18,6 @@ export class UsuarioService {
     localStorage.setItem('token', token);
   }
 
-  surbirImagen(usuario: Usuario, file: File) {
-    const formData = new FormData()
-    formData.append('img', file)
-    const url = `${api_url}/uploads/usuarios/${usuario.uid}`
-    return this.http.post(url, formData, this.headers)
-  }
 
   get token(): string {
     return localStorage.getItem('token') || '';
@@ -34,6 +28,13 @@ export class UsuarioService {
         'x-token': this.token
       }
     }
+  }
+
+  surbirImagen(usuario: Usuario, file: File) {
+    const formData = new FormData()
+    formData.append('img', file)
+    const url = `${api_url}/uploads/usuarios/${usuario.uid}`
+    return this.http.post(url, formData, this.headers)
   }
   eliminar(uid: string) {
     const url = `${api_url}/usuario/${uid}`

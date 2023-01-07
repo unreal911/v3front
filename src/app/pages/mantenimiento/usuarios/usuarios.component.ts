@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ListarUsuarios, Usuario } from 'src/app/interfaces/rpt.listarUsuarios';
+import { BusquedaService } from 'src/app/services/busqueda.service';
 
 import { UsuarioService } from 'src/app/services/usuario.service';
 declare var $: any
@@ -21,7 +22,7 @@ export class UsuariosComponent implements OnInit {
   })
   estado: any
 
-  constructor(private usuarioService: UsuarioService) { }
+  constructor(private usuarioService: UsuarioService, private busquedaService: BusquedaService) { }
   getInput: boolean = false
   campo: any;
   nom: boolean[] = []
@@ -32,10 +33,31 @@ export class UsuariosComponent implements OnInit {
   desde: number = 0
   campoAlfer: string = ''
   public usuarios: Usuario[] = []
+  public usuariosTemp: Usuario[] = []
   cargando: boolean = false
-
+  mostrarAlerta: boolean = false
   ngOnInit(): void {
     this.listarUsuarios()
+  }
+  buscar(termino: string) {
+    console.log(termino)
+    if (termino.length == 0) {
+      this.usuarios = this.usuariosTemp
+      this.mostrarAlerta = false
+      return;
+    }
+    this.busquedaService.busquedaColeccion(termino, 'usuarios').subscribe({
+      next: (r: any) => {
+        this.mostrarAlerta = false
+        console.log(r)
+        this.usuarios = r.resultados
+
+        if (r.resultados.length == 0) {
+          this.mostrarAlerta = true
+        }
+      },
+      error: (e) => { console.log(e) }
+    })
   }
   eliminar(usuario: Usuario) {
     Swal.fire({
@@ -62,17 +84,23 @@ export class UsuariosComponent implements OnInit {
             next: (r) => {
               console.log(r)
               this.listarUsuarios()
+              Swal.fire(
+                'Elimiado!',
+                'El suaurio fue eliminado.',
+                'success'
+              )
             },
             error: (e) => {
               console.log(e)
+              Swal.fire(
+                'Info!',
+                e.error.msg,
+                'error'
+              )
             }
           }
         )
-        Swal.fire(
-          'Elimiado!',
-          'El suaurio fue eliminado.',
-          'success'
-        )
+
       }
     })
   }
@@ -196,6 +224,7 @@ export class UsuariosComponent implements OnInit {
       next: (r) => {
         console.log(r.usuarios)
         this.usuarios = r.usuarios
+        this.usuariosTemp = r.usuarios
         this.totalUsuarios = r.total
         this.cargando = false
       },
