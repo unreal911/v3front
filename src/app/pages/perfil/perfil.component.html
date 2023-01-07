@@ -4,11 +4,12 @@
       <div class="card-body little-profile text-center">
         <div class="image-upload">
           <label for="file-input">
-            <img *ngIf="!imgTemp" src="https://www.chanchao.com.tw/images/default.jpg" class="img-circle" width="150" />
+            <img *ngIf="!imgTemp" [src]="usuario.img['secure_url']" class="img-circle" width="150" />
             <img *ngIf="imgTemp" [src]="imgTemp" class="img-circle" width="150" />
           </label>
-          <input type="file" name="" id="file-input" (change)="cambiarImagen($event)" />
+          <input type="file" name="" id="file-input" (change)="cambiarImagen($event)"/>
         </div>
+        <button type="button" class="btn btn-primary" *ngIf="imgTemp" (click)="guardarImagen()" >Cargar</button>
         <h3 style="cursor: pointer;"  class="m-b-0" *ngIf="!campoNombre" (click)="mostrarCampo(usuario,'nombre')">{{usuario.nombre}}</h3>
         <div class="input-form">
           <div class="input-group" *ngIf="campoNombre">

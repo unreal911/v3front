@@ -15,12 +15,13 @@ export class PerfilComponent implements OnInit {
   public campoNombre: boolean = false
   public campoTelefono: boolean = false
   public campoAfter: string = ''
-  public archivoSubir:any
+  public archivoSubir: any
   constructor(private usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
     // this.cargarUsuario()
     this.usuario = this.usuarioService.usuario
+    console.log(this.usuario)
   }
   cambiarImagen(evento: any) {
     const archivo = evento.target.files[0];
@@ -35,6 +36,27 @@ export class PerfilComponent implements OnInit {
       this.imgTemp = reader.result;
     };
     return;
+  }
+  guardarImagen() {
+
+    Swal.fire({
+      title: 'Cargando',
+      showConfirmButton:false,
+      didOpen(popup) {
+        Swal.showLoading(
+          Swal.getDenyButton()
+        );
+      },
+    })
+
+    this.usuarioService.surbirImagen(this.usuario, this.archivoSubir).subscribe({
+      next: (r) => {
+        console.log(r)
+        Swal.close()
+        Swal.fire('Completado','imagen subida con exito','success')
+      },
+      error: (e) => { console.log(e) }
+    })
   }
   mostrarCampo(usuario: Usuario, campo: string) {
     if (campo == 'email') {
@@ -52,6 +74,9 @@ export class PerfilComponent implements OnInit {
   guardarCampo(usuario: Usuario, campo: string) {
     if (campo == 'email') {
       this.campoEmail = false
+      if (usuario.email == '') {
+        Swal.fire('Error', 'el campo no puede estar vacio', 'error')
+      }
       if (usuario.email == this.campoAfter) {
         return;
       }
@@ -68,6 +93,10 @@ export class PerfilComponent implements OnInit {
       })
     } else if (campo == 'nombre') {
       this.campoNombre = false
+      if (usuario.nombre == '') {
+        Swal.fire('Error', 'el campo no puede estar vacio', 'error')
+        return;
+      }
       if (usuario.nombre == this.campoAfter) {
         return;
       }
@@ -85,6 +114,10 @@ export class PerfilComponent implements OnInit {
       })
     } else if (campo == 'telefono') {
       this.campoTelefono = false
+      if (usuario.telefono == '') {
+        Swal.fire('Error', 'el campo no puede estar vacio', 'error')
+        return;
+      }
       if (usuario.telefono == this.campoAfter) {
         return;
       }

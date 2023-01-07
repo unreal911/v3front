@@ -114,6 +114,10 @@ export class UsuariosComponent implements OnInit {
   clickSave(x: number, campo: string, usuario: Usuario) {
     if (campo == 'nombre') {
       this.nom[x] = false
+      if (usuario.nombre == '') {
+        Swal.fire('Error', 'el campo no puede estar vacio', 'error')
+        return;
+      }
       if (usuario.nombre == this.campoAlfer) {
         return;
       }
@@ -131,6 +135,10 @@ export class UsuariosComponent implements OnInit {
       )
     } else if (campo == 'email') {
       this.email[x] = false
+      if (usuario.email == '') {
+        Swal.fire('Error', 'el campo no puede estar vacio', 'error')
+        return;
+      }
       if (usuario.email == this.campoAlfer) {
         return;
       }
@@ -148,6 +156,10 @@ export class UsuariosComponent implements OnInit {
       )
     } else if (campo == 'telefono') {
       this.telefono[x] = false
+      if (usuario.telefono == '') {
+        Swal.fire('Error', 'el campo no puede estar vacio', 'error')
+        return;
+      }
       if (usuario.telefono == this.campoAlfer) {
         return;
       }
