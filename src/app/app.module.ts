@@ -10,10 +10,12 @@ import { PagesModule } from './pages/pages.module';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from "@angular/common/http";
 
+
 @NgModule({
   declarations: [
     AppComponent,
     NoPageFoundComponent,
+
 
   ],
   imports: [
@@ -23,7 +25,8 @@ import { HttpClientModule } from "@angular/common/http";
     AuthModule,
     PagesModule,
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
+
 
 
   ],

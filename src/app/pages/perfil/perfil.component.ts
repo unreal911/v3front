@@ -55,6 +55,7 @@ export class PerfilComponent implements OnInit {
         Swal.close()
         Swal.fire('Completado','imagen subida con exito','success')
       },
+      
       error: (e) => { console.log(e) }
     })
   }
@@ -98,6 +99,7 @@ export class PerfilComponent implements OnInit {
         return;
       }
       if (usuario.nombre == this.campoAfter) {
+          usuario.nombre=this.campoAfter //Milton
         return;
       }
 

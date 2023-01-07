@@ -4,7 +4,7 @@
       <!-- Sidebar navigation-->
       <nav class="sidebar-nav active">
           <ul id="sidebarnav" class="in">
-              <li class="user-profile"> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img src="../assets/images/users/profile.png" alt="user"><span class="hide-menu">Steave Jobs </span></a>
+              <li class="user-profile"> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img [src]="usuariox.img.secure_url"alt="user"><span class="hide-menu">{{usuariox.nombre | cortarNombres}} </span></a>
                   <ul aria-expanded="false" class="collapse">
                       <li><a href="javascript:void()" [routerLink]="['perfil']" routerLinkActive="active" >Perfil </a></li>
                       <li><a href="javascript:void()">My Balance</a></li>
