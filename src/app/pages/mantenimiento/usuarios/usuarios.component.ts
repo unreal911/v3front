@@ -28,7 +28,6 @@ export class UsuariosComponent implements OnInit {
   nom: boolean[] = []
   email: boolean[] = []
   telefono: boolean[] = []
-  matriz: any
   totalUsuarios: any
   desde: number = 0
   campoAlfer: string = ''
@@ -137,12 +136,12 @@ export class UsuariosComponent implements OnInit {
       this.telefono[i] = true
       this.campoAlfer = usuario.telefono
     }
-
   }
   clickSave(x: number, campo: string, usuario: Usuario) {
     if (campo == 'nombre') {
       this.nom[x] = false
       if (usuario.nombre == '') {
+        usuario.nombre=this.campoAlfer
         Swal.fire('Error', 'el campo no puede estar vacio', 'error')
         return;
       }

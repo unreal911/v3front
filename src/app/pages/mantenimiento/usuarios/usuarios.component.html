@@ -40,8 +40,9 @@
         <tbody>
           <tr *ngFor="let usuario of usuarios;let i=index">
             <td>
-              <i *ngIf="!usuario.img.url || usuario.img.url=='nodefinido'" class="fa fa-file-image-o fa-2x"></i>
-              <img [src]="usuario.img.url" alt="" class="img-circle" width="100" *ngIf="usuario.img.url">
+    <!--  <i *ngIf="!usuario.img.url || usuario.img.url=='nodefinido'" class="fa fa-file-image-o fa-2x"></i>
+              <img [src]="usuario.img.url" alt="" class="img-circle" width="100" *ngIf="usuario.img.url">-->
+              <app-img-user [usuario]="usuario" [ancho]="50"></app-img-user>
             </td>
             <td>
               <p (click)="clickNom(i,'nombre',usuario)" *ngIf="!nom[i]">{{usuario.nombre}}</p>

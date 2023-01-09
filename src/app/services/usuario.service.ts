@@ -34,7 +34,13 @@ export class UsuarioService {
     const formData = new FormData()
     formData.append('img', file)
     const url = `${api_url}/uploads/usuarios/${usuario.uid}`
-    return this.http.post(url, formData, this.headers)
+    return this.http.post(url, formData, this.headers).pipe(
+      tap(
+        (r:any)=>{
+          this.usuario.img=r.modelo.img
+        }
+      )
+    )
 
   }
   eliminar(uid: string) {

@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PerfilComponent } from './perfil/perfil.component';
 import { CrearComponent } from './mantenimiento/usuarios/crear/crear.component';
+import { ComponentsModule } from '../components/components.module';
 
 
 
@@ -32,14 +33,16 @@ import { CrearComponent } from './mantenimiento/usuarios/crear/crear.component';
     SharedModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ComponentsModule
   ],
   exports: [
     PrincipalComponent,
     UsuariosComponent,
     CategoriasComponent,
     ProductosComponent,
-    PagesComponent
+    PagesComponent,
+
   ]
 })
 export class PagesModule { }
