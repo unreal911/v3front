@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ListarUsuarios, Usuario } from 'src/app/interfaces/rpt.listarUsuarios';
 import { BusquedaService } from 'src/app/services/busqueda.service';
-
+import { ToastrService } from 'ngx-toastr';
 import { UsuarioService } from 'src/app/services/usuario.service';
 declare var $: any
 import Swal from 'sweetalert2'
@@ -22,7 +22,9 @@ export class UsuariosComponent implements OnInit {
   })
   estado: any
 
-  constructor(private usuarioService: UsuarioService, private busquedaService: BusquedaService) { }
+  constructor(private usuarioService: UsuarioService,
+    private busquedaService: BusquedaService,
+    private toastr: ToastrService) { }
   getInput: boolean = false
   campo: any;
   nom: boolean[] = []
@@ -39,7 +41,7 @@ export class UsuariosComponent implements OnInit {
     this.listarUsuarios()
   }
   buscar(termino: string) {
-    console.log(termino)
+    // console.log(termino)
     if (termino.length == 0) {
       this.usuarios = this.usuariosTemp
       this.mostrarAlerta = false
@@ -48,7 +50,7 @@ export class UsuariosComponent implements OnInit {
     this.busquedaService.busquedaColeccion(termino, 'usuarios').subscribe({
       next: (r: any) => {
         this.mostrarAlerta = false
-        console.log(r)
+        //   console.log(r)
         this.usuarios = r.resultados
 
         if (r.resultados.length == 0) {
@@ -106,7 +108,10 @@ export class UsuariosComponent implements OnInit {
   cambiarEstado(usuario: Usuario) {
     this.usuarioService.cambiarEstado(usuario).subscribe(
       {
-        next: (r) => { console.log(r) },
+        next: (r) => {
+          console.log(r)
+          this.toastr.success('Cambio realizado!!!', 'Se cambio el estado');
+        },
         error: (e) => {
           console.log(e)
           Swal.fire('Error', e.error.msg, 'error')
@@ -117,10 +122,18 @@ export class UsuariosComponent implements OnInit {
   cambiarRol(usuario: Usuario) {
     this.usuarioService.cambiaRol(usuario).subscribe(
       {
-        next: (r) => { console.log(r) },
+        next: (r) => {
+          console.log(r)
+          this.toastr.success('Cambio realizado!!!', 'Se cambio el rol ');
+        },
         error: (e) => {
           console.log(e)
-          Swal.fire('Error', e.error.msg, 'error')
+          if (e.error.msg) {
+            Swal.fire('Error', e.error.msg, 'error')
+          } else {
+            Swal.fire('Error', e.error.errors[0].msg, 'error')
+          }
+
         }
       }
     )
@@ -141,7 +154,7 @@ export class UsuariosComponent implements OnInit {
     if (campo == 'nombre') {
       this.nom[x] = false
       if (usuario.nombre == '') {
-        usuario.nombre=this.campoAlfer
+        usuario.nombre = this.campoAlfer
         Swal.fire('Error', 'el campo no puede estar vacio', 'error')
         return;
       }

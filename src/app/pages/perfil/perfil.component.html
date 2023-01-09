@@ -4,7 +4,7 @@
       <div class="card-body little-profile text-center">
         <div class="image-upload">
           <label for="file-input">
-            <img *ngIf="!imgTemp" [src]="usuario.img['secure_url']" class="img-circle" width="150" />
+            <img *ngIf="!imgTemp" [src]="usuario.img['secure_url'] || 'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg'" class="img-circle" width="150" />
             <img *ngIf="imgTemp" [src]="imgTemp" class="img-circle" width="150" />
           </label>
           <input type="file" name="" id="file-input" (change)="cambiarImagen($event)"/>
