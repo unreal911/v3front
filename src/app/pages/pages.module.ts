@@ -13,7 +13,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PerfilComponent } from './perfil/perfil.component';
 import { CrearComponent } from './mantenimiento/usuarios/crear/crear.component';
 import { ComponentsModule } from '../components/components.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { ComponentsModule } from '../components/components.module';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    ComponentsModule
+    ComponentsModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), 
   ],
   exports: [
     PrincipalComponent,

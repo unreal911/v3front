@@ -13,13 +13,26 @@ export class CategoriaService {
   guardarLocalStorage(token: string) {
     localStorage.setItem('token', token);
   }
+  crearCategoria(nombre: string) {
+    const url = `${api_url}/categoria`
+    return this.http.post(url, { nombre: nombre }, this.headers)
+  }
+  actualizarEstado(categoria: Categoria) {
+    const url = `${api_url}/categoria/estado/${categoria._id}`
+    return this.http.put(url, { estado: categoria.estado }, this.headers)
+  }
+  eliminarCategoria(categoria:Categoria){
+      const url = `${api_url}/categoria/${categoria._id}`
+      return this.http.delete(url,this.headers)
+  }
+
   listarCategoria(desde: number, hasta: number) {
     const url = `${api_url}/categoria/listar/${desde}/${hasta}`
     return this.http.get<listarCategoria>(url, this.headers)
   }
-  ActualizarCategoria(categoria:Categoria){
+  ActualizarCategoria(categoria: Categoria) {
     const url = `${api_url}/categoria/${categoria._id}`
-    return this.http.put(url,{nombre:categoria.nombre},this.headers)
+    return this.http.put(url, { nombre: categoria.nombre }, this.headers)
   }
   get token(): string {
     return localStorage.getItem('token') || '';

@@ -1,8 +1,24 @@
+<div class="card text-center">
+  <img class="card-img-top" src="holder.js/100px180/" alt="">
+  <div class="card-body">
+    <h4 class="card-title text-primary">Categorias</h4>
+    <input type="text" placeholder="Buscar" class="form-control" #txtTermino (keyup)="buscar(txtTermino.value)">
+  </div>
+</div>
+<div class="alert alert-primary text-center" role="alert" *ngIf="cargando">
+  <strong>
+    <h4 class="alert-heading">Cargando</h4>
+    <i class="fa fa-spin fa-refresh fa-2x"></i>
+    <p class="mb-0">Por favor espere</p>
+  </strong>
+</div>
 <div class="col-12">
   <div class="card">
+    <div class="d-flex justify-content-end pr-4 pt-4">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+        data-whatever="@getbootstrap">Crear</button>
+    </div>
     <div class="card-body">
-      <h4 class="card-title">Bordered Table</h4>
-      <h6 class="card-subtitle">Add<code>.table-bordered</code>for borders on all sides of the table and cells.</h6>
       <div class="table-responsive">
         <table class="table table-bordered">
           <thead>
@@ -24,20 +40,50 @@
 
               </td>
               <td>
-                <select [(ngModel)]="categoria.estado" class="form-control">
+                <select [(ngModel)]="categoria.estado" class="form-control" (change)="cambiarEstado(categoria)">
                   <option value="true">activo</option>
                   <option value="false">false</option>
                 </select>
               </td>
-              <td class="text-nowrap">
-                <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i
-                    class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i>
+              <td class="text-nowrap d-flex justify-content-center">
+                <a (click)="eliminarCategoria(categoria)" data-toggle="tooltip" data-original-title="Close"> <i
+                    class="fa fa-close text-danger"></i>
                 </a>
               </td>
             </tr>
           </tbody>
         </table>
+        <div class="" *ngIf="txtTermino.value==''">
+          <button type="button" class="btn btn-outline-primary mr-3" (click)="cambiarPagina(-5)">atras</button>
+          <button type="button" class="btn btn-outline-primary" (click)="cambiarPagina(+5)">siguiente</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <h5 class="modal-title text-light" id="exampleModalLabel">Crear categoria</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Nombre:</label>
+            <input type="text" class="form-control" id="recipient-name" #txtNombre>
+            <span *ngIf="campovalido">El nombre ya existe en la base de datos</span>
+            <span *ngIf="campoVacio">el campo no puede estar vacio</span>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="crearCategoria(txtNombre.value)">Crear</button>
       </div>
     </div>
   </div>
