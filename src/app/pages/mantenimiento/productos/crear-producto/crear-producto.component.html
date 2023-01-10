@@ -1,0 +1,59 @@
+<div class="row d-flex justify-content-center">
+  <div class="col-lg-8">
+    <div class="card">
+      <div class="card-header bg-info d-flex justify-content-center">
+        <h4 class="m-b-0 text-white">Producto</h4>
+      </div>
+      <div class="card-body">
+        <form action="#">
+          <div class="form-body">
+            <div class="d-flex justify-content-center">
+              <h3 class="card-title">Crear producto</h3>
+            </div>
+            <hr>
+            <div class="form-group">
+              <label>Nombre</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Categoria</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="form-group">
+              <select class="form-control">
+                <option *ngFor="let categoria of ListaCategoria" [value]="categoria._id">{{categoria.nombre}}</option>
+              </select>
+            </div>
+            <div class="form-group d-flex justify-content-center">
+              <div class="checkbox checkbox-success">
+                <input id="checkbox1" type="checkbox">
+                <label for="checkbox1"> Activo </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Precio</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="">Descripcion</label>
+              <textarea class="form-control" name="" id="" rows="5"></textarea>
+            </div>
+          </div>
+          <div class="form-group d-flex justify-content-center">
+            <div cdkDropList cdkDropListOrientation="horizontal" class="example-list"
+              (cdkDropListDropped)="drop($event)">
+              <div class="example-box text d-flex justify-content-center" *ngFor="let img of ListarImg" cdkDrag>
+                <img [src]="img.url" alt="" width="150">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions d-flex justify-content-center">
+            <button type="submit" class="btn btn-success mr-1"> <i class="fa fa-check"></i> Save</button>
+            <button type="button" class="btn btn-inverse">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

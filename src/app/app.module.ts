@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { PagesModule } from './pages/pages.module';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from "@angular/common/http";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { HttpClientModule } from "@angular/common/http";
     PagesModule,
     SharedModule,
     HttpClientModule,
+    BrowserAnimationsModule,
 
 
 

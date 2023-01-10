@@ -16,7 +16,10 @@ import { ComponentsModule } from '../components/components.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
+import { CrearProductoComponent } from './mantenimiento/productos/crear-producto/crear-producto.component';
 
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,7 @@ import { ToastrModule } from 'ngx-toastr';
     PagesComponent,
     PerfilComponent,
     CrearComponent,
+    CrearProductoComponent,
 
   ],
   imports: [
@@ -38,7 +42,9 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     ComponentsModule,
     BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot(), 
+    ToastrModule.forRoot(),
+    DragDropModule,
+    MatListModule,
   ],
   exports: [
     PrincipalComponent,
@@ -46,6 +52,7 @@ import { ToastrModule } from 'ngx-toastr';
     CategoriasComponent,
     ProductosComponent,
     PagesComponent,
+
 
   ]
 })

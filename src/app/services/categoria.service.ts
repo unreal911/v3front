@@ -25,7 +25,6 @@ export class CategoriaService {
       const url = `${api_url}/categoria/${categoria._id}`
       return this.http.delete(url,this.headers)
   }
-
   listarCategoria(desde: number, hasta: number) {
     const url = `${api_url}/categoria/listar/${desde}/${hasta}`
     return this.http.get<listarCategoria>(url, this.headers)
