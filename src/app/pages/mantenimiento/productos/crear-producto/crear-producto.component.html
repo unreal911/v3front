@@ -42,16 +42,19 @@
           <div class="form-group d-flex justify-content-center">
             <div cdkDropList cdkDropListOrientation="horizontal" class="example-list"
               (cdkDropListDropped)="drop($event)">
-              <div class="example-box text d-flex justify-content-center" *ngFor="let img of ListarImg" cdkDrag>
+              <div class="example-box text d-flex justify-content-center" *ngFor="let img of ListarImg;let i =index" cdkDrag>
                 <div class="card">
                   <div class="d-flex justify-content-end" style="position: absolute;top:0;right:-4px;">
                     <h3>
-                      <span class="badge rounded-pill bg-danger p-2" style="cursor: pointer;">
+                      <span class="badge rounded-pill bg-danger p-2" style="cursor: pointer;"
+                        (click)="BorrarImg(img,i)"
+                      >
                         X
                       </span>
                     </h3>
                   </div>
                   <img [src]="img.url" class="card-img mt-3 mr-5" alt="...">
+                  <button type="button" class="btn btn-primary" *ngIf="!img.id" >subir</button>
                 </div>
               </div>
             </div>
@@ -59,7 +62,7 @@
           <div class="d-flex justify-content-center">
             <div class="file-select" id="src-file1">
               <input type="file" name="src-file1" aria-label="Archivo" style="cursor: pointer;"  multiple
-                #fileInput>
+                #fileInput (change)="subir($event)">
             </div>
           </div>
           <div class="form-actions d-flex justify-content-center">

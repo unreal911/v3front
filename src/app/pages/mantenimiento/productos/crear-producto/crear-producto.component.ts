@@ -16,8 +16,10 @@ export class CrearProductoComponent implements OnInit {
   public ListaCategoria: Categoria[] = []
   public id: any
   public Producto: any
-  public ListarImg: Img[] = []
+  public ListarImg: any[] = []
   cambia: boolean = false
+  files: any
+  imagenesTemp:any[]=[]
   constructor(private categoriaServices: CategoriaService,
     private route: ActivatedRoute,
     private productoService: ProductoService,
@@ -35,26 +37,71 @@ export class CrearProductoComponent implements OnInit {
       this.cargarProducto(this.id)
     });
   }
-
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.ListarImg, event.previousIndex, event.currentIndex);
-    this.fileUploadService.cambiarPosicion(event.previousIndex, event.currentIndex, this.id).subscribe(
-      {
-        next: (e) => {
-          console.log(e)
-          this.cambia = true
-          this.toastr.success('Cambio realizado!!!', 'Se cambio la posicion');
-          this.cargarProducto(this.id)
-        },
-        error: (r) => {
-          console.log(r)
-        },
-        complete: () => {
-        }
+  BorrarImg(img:any,i:number){
+      console.log(i)
+      if(img.id){
+        console.log('Hola')
+      }else{
+        console.log(img.file)
+        this.ListarImg.splice(i,1)
       }
-    )
   }
-  
+  drop(event: CdkDragDrop<string[]>) {
+    this.imagenesTemp=this.ListarImg
+    //console.log(this.ListarImg)
+    //this.toastr.error('Esto no se puede hacer!!!', 'Cambios no realizados');
+    moveItemInArray(this.ListarImg, event.previousIndex, event.currentIndex);
+    if (this.ListarImg[event.previousIndex].file) {
+      // console.log(this.ListarImg[event.previousIndex])
+      this.toastr.error('Esto no se puede hacer!!!', 'Cambios no realizados');
+      this.cargarProducto(this.id)
+      console.log('Hola')
+      return;
+    } else if (this.ListarImg[event.currentIndex].file) {
+      this.toastr.error('Esto no se puede hacer!!!', 'Cambios no realizados');
+      this.cargarProducto(this.id)
+    }else{
+      this.fileUploadService.cambiarPosicion(event.previousIndex, event.currentIndex, this.id).subscribe(
+        {
+          next: (e) => {
+            console.log(e)
+            this.cambia = true
+            this.toastr.success('Cambio realizado!!!', 'Se cambio la posicion');
+
+          },
+          error: (r) => {
+            console.log(r)
+          },
+          complete: () => {
+            this.cargarProducto(this.id)
+          }
+        }
+      )
+    }
+  }
+  subir(event: any) {
+    // let arrayTemp: any[] = []
+    this.files = event.target.files;
+    for (const key in this.files) {
+      const element = this.files[key];
+      // Creamos un objeto Blob a partir del archivo seleccionado
+      const blob = new Blob([element], { type: element.type });
+      const reader = new FileReader();
+      // Leemos el contenido del Blob y obtenemos una URL codificada en base64
+      reader.onload = (resp) => {
+        let ls = resp.target?.result
+        if (!ls?.toString().includes('data:application/octet-stream')) {
+          this.ListarImg.push(
+            {
+              file: element,
+              url: ls
+            })
+        }
+      };
+      reader.readAsDataURL(blob);
+    }
+
+  }
   cargarProducto(uid: string) {
     this.productoService.ProductoId(uid).subscribe(
       {
