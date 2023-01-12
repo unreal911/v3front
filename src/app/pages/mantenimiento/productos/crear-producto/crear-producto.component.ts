@@ -42,14 +42,48 @@ export class CrearProductoComponent implements OnInit {
 
 
   }
+  EditarProducto() {
 
+    if (!this.prductoForm.valid) {
+      Swal.fire('Error!!', 'Falta llenar campos', 'error')
+      return;
+    }
+    if (this.Producto.nombre == this.prductoForm.value.nombre) {
+      delete this.prductoForm.value.nombre
+    }
+    this.productoService.editarProducto(this.prductoForm.value,this.Producto.uid).subscribe({
+      next: (r) => { console.log(r)
+        this.cargarProducto(this.id)
+      },
+      error: (e) => {
+        Swal.fire('Error!!', e.error.errors[0].msg, 'error')
+        console.log(e)
+
+      }
+    })
+
+  }
+  validarCampo(nombre: string) {
+    if (this.prductoForm.get(nombre)?.pristine == false && this.prductoForm.get(nombre)?.valid == true) {
+      return true
+    } else {
+      return false
+    }
+  }
+  campoIncorrecto(campo: string) {
+    if (this.prductoForm.get(campo)?.pristine == false && this.prductoForm.get(campo)?.invalid == true) {
+      return true
+    } else {
+      return false
+    }
+  }
   guardarImagen(i: number) {
     console.log(i)
     this.fileUploadService.subirArchivo(this.id, this.ListarImg[i].file, 'productos').subscribe(
       {
-        next: (r:any) => {
-       //   this.ListarImg[i].estado=false
-          this.ListarImg[i]=r.producto.img[i]
+        next: (r: any) => {
+          //   this.ListarImg[i].estado=false
+          this.ListarImg[i] = r.producto.img[i]
           console.log(this.ListarImg)
           console.log(r)
 
@@ -60,9 +94,6 @@ export class CrearProductoComponent implements OnInit {
     )
     this.ListarImg
   }
-  cambiarBoton(){
-
-  }
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.id = params.get('id');
@@ -72,34 +103,37 @@ export class CrearProductoComponent implements OnInit {
       this.cargarProducto(this.id)
     });
 
+
     this.listarCategorias()
 
   }
-
   guardarProducto() {
-    if (this.prductoForm.valid) {
-      this.productoService.crearProducto(this.prductoForm.value).subscribe({
-        next: (r: any) => {
-          console.log(r)
-          this.router.navigateByUrl(`/principal/producto/${r.producto.uid}`)
-        },
-        error: (e) => {
-          Swal.fire('!!Error',`${e.error.errors[0].msg}`,'error')
-          console.log(e)
-        }
-      })
-    } else {
-      console.log('debes llenar los campos')
+    if (!this.prductoForm.valid) {
+      Swal.fire('Error!!', 'Falta llenar campos', 'error')
+      return;
     }
+
+    this.productoService.crearProducto(this.prductoForm.value).subscribe({
+      next: (r: any) => {
+        console.log(r)
+        this.router.navigateByUrl(`/principal/producto/${r.producto.uid}`)
+      },
+      error: (e) => {
+        Swal.fire('!!Error', `${e.error.errors[0].msg}`, 'error')
+        console.log(e)
+      }
+    })
+
   }
   BorrarImg(img: any, i: number) {
     console.log(i)
     if (img.id) {
       this.fileUploadService.eliminarArchivo(this.id, this.ListarImg[i].id).subscribe({
-        next:(r)=>{console.log(r)
+        next: (r) => {
+          console.log(r)
           this.ListarImg.splice(i, 1)
         },
-        error:(e)=>{console.log(e)}
+        error: (e) => { console.log(e) }
       })
       console.log('Hola')
     } else {
@@ -156,7 +190,7 @@ export class CrearProductoComponent implements OnInit {
             {
               file: element,
               url: ls,
-              estado:false
+              estado: false
             })
         }
       };

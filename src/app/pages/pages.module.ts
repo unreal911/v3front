@@ -20,6 +20,7 @@ import { CrearProductoComponent } from './mantenimiento/productos/crear-producto
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatListModule } from '@angular/material/list';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { MatListModule } from '@angular/material/list';
     ToastrModule.forRoot(),
     DragDropModule,
     MatListModule,
+    PipesModule
   ],
   exports: [
     PrincipalComponent,

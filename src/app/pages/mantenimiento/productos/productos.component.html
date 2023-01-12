@@ -1,41 +1,66 @@
+<div class="card text-center">
+  <div class="card-body">
+    <h4 class="card-title text-primary">Categorias</h4>
+    <input type="text" placeholder="Buscar" class="form-control" #txtTermino (keyup)="buscar(txtTermino.value)">
+  </div>
+</div>
+<div class="alert alert-primary text-center" role="alert" *ngIf="cargando">
+  <strong>
+    <h4 class="alert-heading">Cargando</h4>
+    <i class="fa fa-spin fa-refresh fa-2x"></i>
+    <p class="mb-0">Por favor espere</p>
+  </strong>
+</div>
 <div class="col-12">
   <div class="card">
     <div class="card-body">
       <h4 class="card-title">Productos</h4>
       <div class="d-flex justify-content-end">
         <button type="button" class="btn btn-primary" [routerLink]="['crear']">Crear</button>
-        <button type="button" class="btn btn-primary"
-          [routerLink]="['../producto/63bf2e2b037deb77bb37717a']">Editar</button>
       </div>
       <div class="table-responsive">
         <table class="table table-striped">
           <thead>
             <tr>
-              <th>Task</th>
-              <th>Progress</th>
-              <th>Deadline</th>
+              <th>img</th>
+              <th>Nombre</th>
+              <th>Precio</th>
+              <th>Disponible</th>
               <th class="text-nowrap">Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Lunar probe project</td>
+            <tr *ngFor="let producto of productos">
               <td>
-                <div class="progress progress-xs margin-vertical-10 ">
-                  <div class="progress-bar bg-danger" style="width: 35% ;height:6px;"></div>
-                </div>
+                <img
+                  [src]="(producto.img[0] | mostrarImg) || 'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg'"
+                  alt="" width="40" class="img-circle">
               </td>
-              <td>May 15, 2015</td>
+              <td>
+                {{producto.nombre}}
+              </td>
+              <td> {{producto.precio}}</td>
+              <td>
+                <select [(ngModel)]="producto.disponible" class="form-control" (change)="editarDisponible(producto)">
+                  <option value="true">Si</option>
+                  <option value="false">No</option>
+
+                </select>
+              </td>
               <td class="text-nowrap">
-                <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i
-                    class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i>
-                </a>
+                <button type="button" class="btn btn-outline-primary" [routerLink]="['../producto',producto.uid]"><i
+                    class="fa fa-pencil "></i></button>
+                <button type="button" class="btn btn-outline-danger" (click)="eliminarProducto(producto)"><i
+                    class="fa fa-close"></i></button>
               </td>
             </tr>
 
           </tbody>
         </table>
+        <div class="" *ngIf="txtTermino.value==''">
+          <button type="button" class="btn btn-outline-primary mr-3" (click)="cambiarPagina(-5)">atras</button>
+          <button type="button" class="btn btn-outline-primary" (click)="cambiarPagina(+5)">siguiente</button>
+        </div>
       </div>
     </div>
   </div>
