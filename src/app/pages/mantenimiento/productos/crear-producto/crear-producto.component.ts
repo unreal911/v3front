@@ -37,7 +37,8 @@ export class CrearProductoComponent implements OnInit {
     private fileUploadService: FileUploadService,
     private toastr: ToastrService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+
   ) {
 
 
@@ -51,9 +52,11 @@ export class CrearProductoComponent implements OnInit {
     if (this.Producto.nombre == this.prductoForm.value.nombre) {
       delete this.prductoForm.value.nombre
     }
-    this.productoService.editarProducto(this.prductoForm.value,this.Producto.uid).subscribe({
-      next: (r) => { console.log(r)
+    this.productoService.editarProducto(this.prductoForm.value, this.Producto.uid).subscribe({
+      next: (r) => {
+        console.log(r)
         this.cargarProducto(this.id)
+        this.toastr.success('Se actualizo correctamente!!!', 'Cambios realizados');
       },
       error: (e) => {
         Swal.fire('Error!!', e.error.errors[0].msg, 'error')
