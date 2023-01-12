@@ -8,7 +8,7 @@ const api_url = environment.base_url
 })
 export class ProductoService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
   get token(): string {
     return localStorage.getItem('token') || '';
   }
@@ -19,8 +19,12 @@ export class ProductoService {
       }
     }
   }
-  ProductoId(uid:string){
+  ProductoId(uid: string) {
     const url = `${api_url}/producto/id/${uid}`
-    return this.http.get<ProductoID>(url,this.headers)
+    return this.http.get<ProductoID>(url, this.headers)
+  }
+  crearProducto(body: any) {
+    const url = `${api_url}/producto`
+    return this.http.post(url, body, this.headers)
   }
 }

@@ -26,4 +26,21 @@ export class FileUploadService {
       }
     )
   }
+  subirArchivo(uid: string, file: any, coleccion: 'usuarios' | 'productos' | 'categorias') {
+    const formData = new FormData()
+    formData.append('img', file)
+    const url = `${api_url}/uploads/${uid}`
+    return this.http.post(url, formData, this.headers)
+  }
+  eliminarArchivo(uid: string, public_id: string) {
+    const url = `${api_url}/uploads/${uid}`
+    return this.http.delete(url, {
+      body: {
+        img: public_id
+      },
+      headers: {
+        'x-token': this.token
+      }
+    })
+  }
 }

@@ -7,6 +7,8 @@ import { ProductoService } from 'src/app/services/producto.service';
 import { Img, ListarProducto, Producto } from 'src/app/interfaces/rpt.listarProducto';
 import { FileUploadService } from 'src/app/services/file-upload.service';
 import { ToastrService } from 'ngx-toastr';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-crear-producto',
   templateUrl: './crear-producto.component.html',
@@ -15,20 +17,53 @@ import { ToastrService } from 'ngx-toastr';
 export class CrearProductoComponent implements OnInit {
   public ListaCategoria: Categoria[] = []
   public id: any
-  public Producto: any
+  public Producto: any;
   public ListarImg: any[] = []
   cambia: boolean = false
   files: any
-  imagenesTemp:any[]=[]
+  imagenesTemp: any[] = []
+  imagenesbolean: boolean[] = []
+  public prductoForm: FormGroup = new FormGroup({
+    nombre: new FormControl('', [Validators.required]),
+    categoria: new FormControl('', [Validators.required]),
+    precio: new FormControl('', [Validators.required]),
+    disponible: new FormControl(false),
+    descripcion: new FormControl('')
+
+  })
   constructor(private categoriaServices: CategoriaService,
     private route: ActivatedRoute,
     private productoService: ProductoService,
     private fileUploadService: FileUploadService,
-    private toastr: ToastrService
-  ) { }
+    private toastr: ToastrService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {
 
+
+  }
+
+  guardarImagen(i: number) {
+    console.log(i)
+    this.fileUploadService.subirArchivo(this.id, this.ListarImg[i].file, 'productos').subscribe(
+      {
+        next: (r:any) => {
+       //   this.ListarImg[i].estado=false
+          this.ListarImg[i]=r.producto.img[i]
+          console.log(this.ListarImg)
+          console.log(r)
+
+        },
+        error: (e) => { console.log(e) }
+
+      }
+    )
+    this.ListarImg
+  }
+  cambiarBoton(){
+
+  }
   ngOnInit(): void {
-    this.listarCategorias()
     this.route.paramMap.subscribe(params => {
       this.id = params.get('id');
       if (!this.id) {
@@ -36,18 +71,44 @@ export class CrearProductoComponent implements OnInit {
       }
       this.cargarProducto(this.id)
     });
+
+    this.listarCategorias()
+
   }
-  BorrarImg(img:any,i:number){
-      console.log(i)
-      if(img.id){
-        console.log('Hola')
-      }else{
-        console.log(img.file)
-        this.ListarImg.splice(i,1)
-      }
+
+  guardarProducto() {
+    if (this.prductoForm.valid) {
+      this.productoService.crearProducto(this.prductoForm.value).subscribe({
+        next: (r: any) => {
+          console.log(r)
+          this.router.navigateByUrl(`/principal/producto/${r.producto.uid}`)
+        },
+        error: (e) => {
+          Swal.fire('!!Error',`${e.error.errors[0].msg}`,'error')
+          console.log(e)
+        }
+      })
+    } else {
+      console.log('debes llenar los campos')
+    }
+  }
+  BorrarImg(img: any, i: number) {
+    console.log(i)
+    if (img.id) {
+      this.fileUploadService.eliminarArchivo(this.id, this.ListarImg[i].id).subscribe({
+        next:(r)=>{console.log(r)
+          this.ListarImg.splice(i, 1)
+        },
+        error:(e)=>{console.log(e)}
+      })
+      console.log('Hola')
+    } else {
+      console.log(img.file)
+      this.ListarImg.splice(i, 1)
+    }
   }
   drop(event: CdkDragDrop<string[]>) {
-    this.imagenesTemp=this.ListarImg
+    this.imagenesTemp = this.ListarImg
     //console.log(this.ListarImg)
     //this.toastr.error('Esto no se puede hacer!!!', 'Cambios no realizados');
     moveItemInArray(this.ListarImg, event.previousIndex, event.currentIndex);
@@ -60,7 +121,7 @@ export class CrearProductoComponent implements OnInit {
     } else if (this.ListarImg[event.currentIndex].file) {
       this.toastr.error('Esto no se puede hacer!!!', 'Cambios no realizados');
       this.cargarProducto(this.id)
-    }else{
+    } else {
       this.fileUploadService.cambiarPosicion(event.previousIndex, event.currentIndex, this.id).subscribe(
         {
           next: (e) => {
@@ -94,7 +155,8 @@ export class CrearProductoComponent implements OnInit {
           this.ListarImg.push(
             {
               file: element,
-              url: ls
+              url: ls,
+              estado:false
             })
         }
       };
@@ -106,12 +168,22 @@ export class CrearProductoComponent implements OnInit {
     this.productoService.ProductoId(uid).subscribe(
       {
         next: (r) => {
+          console.log(r)
           this.Producto = r.producto
           this.ListarImg = r.producto.img
-          console.log(this.ListarImg)
-          console.log(this.Producto)
+          this.prductoForm.setValue({
+            nombre: r.producto.nombre,
+            categoria: r.producto.categoria,
+            precio: r.producto.precio,
+            descripcion: r.producto.descripcion,
+            disponible: r.producto.disponible
+          })
+
         },
-        error: (e) => { console.log(e) }
+        error: (e) => { console.log(e) },
+        complete() {
+
+        },
       }
     )
   }
@@ -124,5 +196,4 @@ export class CrearProductoComponent implements OnInit {
       error: (e) => { console.log(e) }
     })
   }
-
 }

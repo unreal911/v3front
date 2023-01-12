@@ -81,11 +81,7 @@
 }
 
 #src-file1::before {
-  content: 'Seleccionar Archivo 1';
-}
-
-#src-file2::before {
-  content: 'Seleccionar Archivo 2';
+  content: 'Seleccionar Archivo ';
 }
 .fade {
   transition: opacity 2s ease-in-out;
