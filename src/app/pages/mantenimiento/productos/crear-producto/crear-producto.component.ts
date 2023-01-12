@@ -81,6 +81,17 @@ export class CrearProductoComponent implements OnInit {
     }
   }
   guardarImagen(i: number) {
+
+    Swal.fire({
+      title: 'Cargando',
+      showConfirmButton: false,
+      didOpen(popup) {
+        Swal.showLoading(
+          Swal.getDenyButton()
+        );
+      },
+    })
+
     console.log(i)
     this.fileUploadService.subirArchivo(this.id, this.ListarImg[i].file, 'productos').subscribe(
       {
@@ -89,7 +100,8 @@ export class CrearProductoComponent implements OnInit {
           this.ListarImg[i] = r.producto.img[i]
           console.log(this.ListarImg)
           console.log(r)
-
+          Swal.close()
+          Swal.fire('Completado', 'imagen subida con exito', 'success')
         },
         error: (e) => { console.log(e) }
 
@@ -131,10 +143,21 @@ export class CrearProductoComponent implements OnInit {
   BorrarImg(img: any, i: number) {
     console.log(i)
     if (img.id) {
+      Swal.fire({
+        title: 'Cargando',
+        showConfirmButton: false,
+        didOpen(popup) {
+          Swal.showLoading(
+            Swal.getDenyButton()
+          );
+        },
+      })
       this.fileUploadService.eliminarArchivo(this.id, this.ListarImg[i].id).subscribe({
         next: (r) => {
           console.log(r)
           this.ListarImg.splice(i, 1)
+          Swal.close()
+          Swal.fire('Completado', 'imagen eliminada', 'success')
         },
         error: (e) => { console.log(e) }
       })
