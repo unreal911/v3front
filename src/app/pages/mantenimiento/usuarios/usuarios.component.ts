@@ -106,6 +106,10 @@ export class UsuariosComponent implements OnInit {
     })
   }
   cambiarEstado(usuario: Usuario) {
+    if (this.usuarioService.usuario.uid == usuario.uid) {
+      Swal.fire('Cuidado', 'No puedes cambiar estado a ti mismo', 'info')
+      return;
+    }
     this.usuarioService.cambiarEstado(usuario).subscribe(
       {
         next: (r) => {
@@ -120,6 +124,10 @@ export class UsuariosComponent implements OnInit {
     )
   }
   cambiarRol(usuario: Usuario) {
+    if (this.usuarioService.usuario.uid == usuario.uid) {
+      Swal.fire('Cuidado', 'No puedes cambiar rol a ti mismo', 'info')
+      return;
+    }
     this.usuarioService.cambiaRol(usuario).subscribe(
       {
         next: (r) => {

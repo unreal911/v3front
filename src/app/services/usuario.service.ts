@@ -91,6 +91,7 @@ export class UsuarioService {
       }
     }).pipe(
       map((resp: any) => {
+        console.log(resp)//TODO: ver la respuesta del token
         this.usuario = resp.usuario
         this.guardarLocalStorage(resp.token);
         return true;

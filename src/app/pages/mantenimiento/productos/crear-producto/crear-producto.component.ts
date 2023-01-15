@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { Categoria, listarCategoria } from 'src/app/interfaces/rpt.listar.categorias';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductoService } from 'src/app/services/producto.service';
-import { Img, ListarProducto, Producto } from 'src/app/interfaces/rpt.listarProducto';
 import { FileUploadService } from 'src/app/services/file-upload.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -23,6 +22,7 @@ export class CrearProductoComponent implements OnInit {
   files: any
   imagenesTemp: any[] = []
   imagenesbolean: boolean[] = []
+  @ViewChild('fileInput') fileInput: any;
   public prductoForm: FormGroup = new FormGroup({
     nombre: new FormControl('', [Validators.required]),
     categoria: new FormControl('', [Validators.required]),
@@ -165,6 +165,10 @@ export class CrearProductoComponent implements OnInit {
     } else {
       console.log(img.file)
       this.ListarImg.splice(i, 1)
+      if (this.fileInput && this.fileInput.nativeElement) {
+        // Resetea el elemento <input type="file">
+        this.fileInput.nativeElement.value = '';
+      }
     }
   }
   drop(event: CdkDragDrop<string[]>) {
