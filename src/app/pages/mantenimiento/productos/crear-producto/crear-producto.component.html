@@ -42,18 +42,16 @@
               </div>
             </div>
             <div class="d-flex justify-content-center">
-              <h2><span class="badge badge-primary mr-1">Primary <i class="mdi mdi-close-circle"></i></span></h2>
-              <h2><span class="badge badge-primary mr-1">Primary <i class="mdi mdi-close-circle"></i></span></h2>
-              <h2><span class="badge badge-primary mr-1">Primary <i class="mdi mdi-close-circle"></i></span></h2>
-              <h2><span class="badge badge-primary mr-1">Primary <i class="mdi mdi-close-circle"></i></span></h2>
-              <h2><span class="badge badge-primary mr-1">Primary <i class="mdi mdi-close-circle"></i></span></h2>
+              <h2><span *ngFor="let item of tallasdisponibles; let i=index" class="badge badge-primary mr-1">{{item}} <i
+                    class="mdi mdi-close-circle" (click)="borrarTalla(i)" style="cursor: pointer;"></i></span></h2>
+              <div class="alert alert-danger" role="alert" *ngIf="tallasdisponibles.length==0">
+                <strong>Seleccione una talla</strong>
+              </div>
             </div>
             <div class="form-group  d-flex justify-content-center">
-              <select class="form-control">
-                <option value="L">L</option>
-                <option value="M">M</option>
-                <option value="S">S</option>
-                <option value="STANDAR">STANDAR</option>
+              <select class="form-control" (change)="agregarTalla(cmbCombo.value)" #cmbCombo>
+                <option value="">Seleccione talla</option>
+                <option *ngFor="let talla of listarTallas" [value]="talla.codigo">{{talla.codigo}}</option>
               </select>
             </div>
 

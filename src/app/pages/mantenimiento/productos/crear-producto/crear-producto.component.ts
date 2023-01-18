@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Categoria, listarCategoria } from 'src/app/interfaces/rpt.listar.categorias';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -8,6 +8,7 @@ import { FileUploadService } from 'src/app/services/file-upload.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { TallasService } from 'src/app/services/tallas.service';
 @Component({
   selector: 'app-crear-producto',
   templateUrl: './crear-producto.component.html',
@@ -18,6 +19,8 @@ export class CrearProductoComponent implements OnInit {
   public id: any
   public Producto: any;
   public ListarImg: any[] = []
+  public listarTallas: any[] = []
+  public tallasdisponibles: any[] = []
   cambia: boolean = false
   files: any
   imagenesTemp: any[] = []
@@ -38,10 +41,29 @@ export class CrearProductoComponent implements OnInit {
     private toastr: ToastrService,
     private fb: FormBuilder,
     private router: Router,
-
+    private tallaService: TallasService
   ) {
 
 
+  }
+  borrarTalla(i:number){
+    this.tallasdisponibles.splice(i,1)
+  }
+  agregarTalla(talla: any) {
+    console.log(talla)
+    if(this.tallasdisponibles.includes(talla)){
+      console.log('Ya tiene esta lla')
+    }else {
+      this.tallasdisponibles.push(talla)
+      console.log(this.tallasdisponibles)
+    }
+  }
+  listarTalla() {
+    this.tallaService.listarTalla().subscribe({
+      next: (r: any) => {
+        this.listarTallas = r.tallas
+      }
+    })
   }
   EditarProducto() {
 
@@ -51,6 +73,11 @@ export class CrearProductoComponent implements OnInit {
     }
     if (this.Producto.nombre == this.prductoForm.value.nombre) {
       delete this.prductoForm.value.nombre
+    }
+    this.prductoForm.value.talla=this.tallasdisponibles
+    if(this.prductoForm.value.talla.length==0){
+      this.toastr.error('seleccione al menos una talla!!!', 'Cambios no realizados!!!');
+      return;
     }
     this.productoService.editarProducto(this.prductoForm.value, this.Producto.uid).subscribe({
       next: (r) => {
@@ -121,7 +148,7 @@ export class CrearProductoComponent implements OnInit {
 
 
     this.listarCategorias()
-
+    this.listarTalla()
   }
   guardarProducto() {
     if (!this.prductoForm.valid) {
@@ -129,6 +156,11 @@ export class CrearProductoComponent implements OnInit {
       return;
     }
 
+    this.prductoForm.value.talla=this.tallasdisponibles
+    if(this.prductoForm.value.talla.length==0){
+      this.toastr.success('seleccione al menos una talla!!!', 'Cambios no realizados!!!');
+      return;
+    }
     this.productoService.crearProducto(this.prductoForm.value).subscribe({
       next: (r: any) => {
         console.log(r)
@@ -236,6 +268,7 @@ export class CrearProductoComponent implements OnInit {
           console.log(r)
           this.Producto = r.producto
           this.ListarImg = r.producto.img
+          this.tallasdisponibles=r.producto.talla
           this.prductoForm.setValue({
             nombre: r.producto.nombre,
             categoria: r.producto.categoria,

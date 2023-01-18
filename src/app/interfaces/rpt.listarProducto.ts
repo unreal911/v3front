@@ -14,6 +14,7 @@ export interface Producto {
   precio: number;
   categoria: string;
   descripcion: string;
+  talla: string[]
   img: Img[];
   uid: string;
   disponible: boolean;

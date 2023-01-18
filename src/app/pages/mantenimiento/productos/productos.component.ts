@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { BusquedaService } from 'src/app/services/busqueda.service';
 import { ProductoService } from 'src/app/services/producto.service';
+import { TallasService } from 'src/app/services/tallas.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,17 +15,22 @@ export class ProductosComponent implements OnInit {
   public productos: any[] = []
   public productosTemp: any[] = []
   public total: number = 0
+  public listarTallas:any[]=[]
   mostrarAlerta: boolean = false
   desde: number = 0
   constructor(
     private busquedaService: BusquedaService,
     private productoService: ProductoService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private tallaService:TallasService
   ) { }
 
   ngOnInit(): void {
     this.listarProductos()
+
   }
+
+
   buscar(termino: string) {
     console.log(termino)
     if (termino.length == 0) {
@@ -104,7 +110,6 @@ export class ProductosComponent implements OnInit {
     this.listarProductos();
     //   this.nom = []
   }
-
   listarProductos() {
     this.cargando = true
     this.productoService.listarProducto(this.desde, 5).subscribe({
