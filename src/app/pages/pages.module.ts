@@ -21,6 +21,8 @@ import { CrearProductoComponent } from './mantenimiento/productos/crear-producto
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatListModule } from '@angular/material/list';
 import { PipesModule } from '../pipes/pipes.module';
+import { MantenimientoComponent } from './mantenimiento/mantenimiento.component';
+import { TallaComponent } from './mantenimiento/talla/talla.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { PipesModule } from '../pipes/pipes.module';
     PerfilComponent,
     CrearComponent,
     CrearProductoComponent,
+    MantenimientoComponent,
+    TallaComponent,
 
   ],
   imports: [

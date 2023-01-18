@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CategoriasComponent } from './mantenimiento/categorias/categorias.component';
 import { CrearProductoComponent } from './mantenimiento/productos/crear-producto/crear-producto.component';
 import { ProductosComponent } from './mantenimiento/productos/productos.component';
+import { TallaComponent } from './mantenimiento/talla/talla.component';
 import { CrearComponent } from './mantenimiento/usuarios/crear/crear.component';
 import { UsuariosComponent } from './mantenimiento/usuarios/usuarios.component';
 import { PerfilComponent } from './perfil/perfil.component';
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'perfil', component: PerfilComponent },
   { path: 'crearUsuario', component: CrearComponent },
   { path: 'productos/crear', component: CrearProductoComponent },
-  { path: 'producto/:id', component: CrearProductoComponent }
+  { path: 'producto/:id', component: CrearProductoComponent },
+  { path: 'tallas', component: TallaComponent }
 ];
 
 @NgModule({

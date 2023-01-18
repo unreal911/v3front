@@ -20,8 +20,8 @@ export class BusquedaService {
       }
     }
   }
-  busquedaColeccion(parametro: string, coleccion: 'usuarios' | 'productos' | 'categorias') {
-    const url =`${api_url}/busqueda/coleccion/${coleccion}/${parametro}`
-    return this.http.get(url,this.headers)
+  busquedaColeccion(parametro: string, coleccion: 'usuarios' | 'productos' | 'categorias' | 'tallas') {
+    const url = `${api_url}/busqueda/coleccion/${coleccion}/${parametro}`
+    return this.http.get(url, this.headers)
   }
 }

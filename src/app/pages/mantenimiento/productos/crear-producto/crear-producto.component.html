@@ -12,7 +12,8 @@
               <h3 class="card-title">Crear producto</h3>
             </div>
             <div class="d-flex justify-content-end">
-              <button type="button" class="btn btn-danger" [routerLink]="['../../productos']"  > <i class="fa fa-backward"></i> Regresar</button>
+              <button type="button" class="btn btn-danger" [routerLink]="['../../productos']"> <i
+                  class="fa fa-backward"></i> Regresar</button>
             </div>
             <hr>
             <div class="form-group"
@@ -40,7 +41,23 @@
                 <label for="checkbox1"> Activo </label>
               </div>
             </div>
-            <div class="form-group" class="form-group"
+            <div class="d-flex justify-content-center">
+              <h2><span class="badge badge-primary mr-1">Primary <i class="mdi mdi-close-circle"></i></span></h2>
+              <h2><span class="badge badge-primary mr-1">Primary <i class="mdi mdi-close-circle"></i></span></h2>
+              <h2><span class="badge badge-primary mr-1">Primary <i class="mdi mdi-close-circle"></i></span></h2>
+              <h2><span class="badge badge-primary mr-1">Primary <i class="mdi mdi-close-circle"></i></span></h2>
+              <h2><span class="badge badge-primary mr-1">Primary <i class="mdi mdi-close-circle"></i></span></h2>
+            </div>
+            <div class="form-group  d-flex justify-content-center">
+              <select class="form-control">
+                <option value="L">L</option>
+                <option value="M">M</option>
+                <option value="S">S</option>
+                <option value="STANDAR">STANDAR</option>
+              </select>
+            </div>
+
+            <div class="form-group"
               [ngClass]="{'has-success':validarCampo('precio'),'has-danger':campoIncorrecto('precio')}">
               <label>Precio</label>
               <input type="number" class="form-control" formControlName="precio"
@@ -84,7 +101,7 @@
             <div class="d-flex justify-content-center">
               <div class="file-select" id="src-file1">
                 <input type="file" name="src-file1" aria-label="Archivo" style="cursor: pointer;" multiple #fileInput
-                  (change)="subir($event)" >
+                  (change)="subir($event)">
               </div>
             </div>
           </div>
@@ -93,9 +110,8 @@
             <button type="submit" class="btn btn-primary mr-1"> <i class="fa fa-check"></i> Crear</button>
           </div>
           <div *ngIf="id" class="form-actions d-flex justify-content-center">
-            <button type="button" class="btn btn-primary mr-1"
-            (click)="EditarProducto()"
-            > <i class="fa fa-check"></i> Editar</button>
+            <button type="button" class="btn btn-primary mr-1" (click)="EditarProducto()"> <i class="fa fa-check"></i>
+              Editar</button>
           </div>
         </form>
       </div>

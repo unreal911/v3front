@@ -1,0 +1,104 @@
+<div class="card text-center">
+  <div class="card-body">
+    <h4 class="card-title text-primary">Tallas</h4>
+    <input type="text" placeholder="Buscar" class="form-control" #txtTermino (keyup)="buscar(txtTermino.value)">
+  </div>
+</div>
+<div class="alert alert-primary text-center" role="alert" *ngIf="cargando">
+  <strong>
+    <h4 class="alert-heading">Cargando</h4>
+    <i class="fa fa-spin fa-refresh fa-2x"></i>
+    <p class="mb-0">Por favor espere</p>
+  </strong>
+</div>
+
+<div class="alert alert-info text-center" role="alert" *ngIf="mostrarAlerta">
+  <strong>
+    <h4 class="alert-heading">Ups</h4>
+    <p class="mb-0">No hay resultados</p>
+  </strong>
+</div>
+
+<div class="col-12">
+  <div class="card">
+    <div class="d-flex justify-content-end pr-4 pt-4">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+        data-whatever="@getbootstrap">Crear</button>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Codigo</th>
+              <th>Nombre</th>
+              <th>Estado</th>
+              <th class="text-nowrap">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let talla of tallas;let i=index">
+              <td>
+                <p (click)="clickNomCodigo(i,'nombre',talla)" *ngIf="!codigo[i]">{{talla.codigo}}</p>
+                <div class="d-flex" *ngIf="codigo[i]">
+                  <input type="text" [(ngModel)]="talla.codigo" class="form-control mr-1">
+                  <button type="button" class="btn-primary btn-sm mr-1" (click)="clickSaveCodigo(i,'nombre',talla)"><i
+                      class="mdi mdi-check"></i></button>
+                </div>
+              </td>
+              <td>
+                <p (click)="clickNom(i,'nombre',talla)" *ngIf="!nom[i]">{{talla.nombre}}</p>
+                <div class="d-flex" *ngIf="nom[i]">
+                  <input type="text" [(ngModel)]="talla.nombre" class="form-control mr-1">
+                  <button type="button" class="btn-primary btn-sm mr-1" (click)="clickSave(i,'nombre',talla)"><i
+                      class="mdi mdi-check"></i></button>
+                </div>
+              </td>
+              <td>
+                <select [(ngModel)]="talla.estado" class="form-control" (change)="cambiarEstado(talla)">
+                  <option value="true">activo</option>
+                  <option value="false">false</option>
+                </select>
+              </td>
+              <td class="text-nowrap d-flex justify-content-center">
+                <a (click)="eliminartalla(talla)" data-toggle="tooltip" data-original-title="Close"> <i
+                    class="fa fa-close text-danger"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <h5 class="modal-title text-light" id="exampleModalLabel">Crear categoria</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Codigo:</label>
+            <input type="text" class="form-control" id="recipient-name" #txtCodigo>
+          </div>
+          <div class="form-group">
+            <label for="recipient-name2" class="col-form-label">Nombre:</label>
+            <input type="text" class="form-control" id="recipient-name2" #txtNombre>
+
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+        <button type="button" class="btn btn-primary"
+          (click)="crearCategoria(txtCodigo.value,txtNombre.value)">Crear</button>
+      </div>
+    </div>
+  </div>
+</div>

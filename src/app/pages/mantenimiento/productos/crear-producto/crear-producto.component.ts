@@ -110,6 +110,7 @@ export class CrearProductoComponent implements OnInit {
     this.ListarImg
   }
   ngOnInit(): void {
+
     this.route.paramMap.subscribe(params => {
       this.id = params.get('id');
       if (!this.id) {
