@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CategoriasComponent } from './mantenimiento/categorias/categorias.component';
+import { DetallePedidoComponent } from './mantenimiento/pedido/detalle-pedido/detalle-pedido.component';
+import { PedidoComponent } from './mantenimiento/pedido/pedido.component';
 import { CrearProductoComponent } from './mantenimiento/productos/crear-producto/crear-producto.component';
 import { ProductosComponent } from './mantenimiento/productos/productos.component';
 import { TallaComponent } from './mantenimiento/talla/talla.component';
@@ -18,7 +20,9 @@ const routes: Routes = [
   { path: 'crearUsuario', component: CrearComponent },
   { path: 'productos/crear', component: CrearProductoComponent },
   { path: 'producto/:id', component: CrearProductoComponent },
-  { path: 'tallas', component: TallaComponent }
+  { path: 'tallas', component: TallaComponent },
+  { path: 'pedidos', component: PedidoComponent },
+  { path: 'detallePedido/:id', component: DetallePedidoComponent }
 ];
 
 @NgModule({

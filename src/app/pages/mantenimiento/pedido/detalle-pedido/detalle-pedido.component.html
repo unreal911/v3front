@@ -1,0 +1,79 @@
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row" #verPdf>
+  <div class="col-md-12">
+    <div class="card card-body printableArea">
+      <h3><b>Boleta</b> <span class="pull-right">#5669626</span></h3>
+      <hr>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="pull-left">
+            <address>
+              <h3> &nbsp;<b class="text-danger">Raivan Store</b></h3>
+              <p class="text-muted m-l-5">E 104, Dharti-2,
+                <br /> Nr' Viswakarma Temple,
+                <br /> Talaja Road,
+                <br /> Bhavnagar - 364002
+              </p>
+            </address>
+          </div>
+          <div class="pull-right text-right">
+            <address>
+              <h3>To,</h3>
+              <h4 class="font-bold">{{pedido.nombre}}</h4>
+              <p class="text-muted m-l-30">
+                {{pedido.direccion}}
+
+              </p>
+              <p class="m-t-30"><b>Fecha :</b> <i class="fa fa-calendar"></i> {{pedido.fecha | date}}</p>
+
+            </address>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="table-responsive m-t-40" style="clear: both;">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th>Descripcion</th>
+                  <th class="text-right">Cantidad</th>
+                  <th class="text-right">Precio Unidad</th>
+                  <th class="text-right">Sub Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of detallePedido">
+                  <td class="text-center">1</td>
+                  <td>{{item.nombre}}</td>
+                  <td class="text-right">{{item.cantidad}} </td>
+                  <td class="text-right"> {{item.precio}} </td>
+                  <td class="text-right"> {{item.subtotal}} </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="pull-right m-t-30 text-right">
+            <!--  <p>Sub - Total amount: $13,848</p>
+            <p>vat (10%) : $138 </p>
+            <hr>-->
+            <h3><b>Total :</b> S/{{importeTotal}}</h3>
+          </div>
+          <div class="clearfix"></div>
+          <hr>
+          <div class="text-right">
+            <button class="btn btn-danger" type="submit"> Proceder a pagar</button>
+            <button (click)="lanzarPrint()" id="print" class="btn btn-default btn-outline" type="button"> <span><i class="fa fa-print"></i>
+                Print</span> </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->

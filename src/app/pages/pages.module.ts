@@ -23,6 +23,8 @@ import { MatListModule } from '@angular/material/list';
 import { PipesModule } from '../pipes/pipes.module';
 import { MantenimientoComponent } from './mantenimiento/mantenimiento.component';
 import { TallaComponent } from './mantenimiento/talla/talla.component';
+import { PedidoComponent } from './mantenimiento/pedido/pedido.component';
+import { DetallePedidoComponent } from './mantenimiento/pedido/detalle-pedido/detalle-pedido.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { TallaComponent } from './mantenimiento/talla/talla.component';
     CrearProductoComponent,
     MantenimientoComponent,
     TallaComponent,
+    PedidoComponent,
+    DetallePedidoComponent,
 
   ],
   imports: [
@@ -60,6 +64,7 @@ import { TallaComponent } from './mantenimiento/talla/talla.component';
     PagesComponent,
 
 
-  ]
+  ],
+
 })
 export class PagesModule { }

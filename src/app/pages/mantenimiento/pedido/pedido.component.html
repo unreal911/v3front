@@ -1,0 +1,106 @@
+<div class="card text-center">
+  <img class="card-img-top" src="holder.js/100px180/" alt="">
+  <div class="card-body">
+    <h4 class="card-title text-primary">Usuarios</h4>
+    <input type="text" placeholder="Buscar" class="form-control" #txtTermino (keyup)="buscar(txtTermino.value)">
+  </div>
+</div>
+<div class="alert alert-primary text-center" role="alert" *ngIf="cargando">
+  <strong>
+    <h4 class="alert-heading">Cargando</h4>
+    <i class="fa fa-spin fa-refresh fa-2x"></i>
+    <p class="mb-0">Por favor espere</p>
+  </strong>
+</div>
+
+<div class="alert alert-info text-center" role="alert" *ngIf="mostrarAlerta">
+  <strong>
+    <h4 class="alert-heading">Info</h4>
+    <p class="mb-0">No hay resultados que mostrar</p>
+  </strong>
+</div>
+<div class="card" *ngIf="!mostrarAlerta">
+  <div class="d-flex justify-content-end p-3">
+    <button type="button" class="btn btn-primary" [routerLink]="['../crearUsuario']">Crear</button>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>nombre</th>
+            <th>email</th>
+            <th>telefono</th>
+            <th>Fecha</th>
+            <th>estado</th>
+            <th>Pagado</th>
+            <th>ImporteTotal</th>
+            <th class="text-nowrap">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usuario of pedidos;let i=index">
+            <td>
+              <p (click)="clickNom(i,'nombre',usuario)" *ngIf="!nom[i]">{{usuario.nombre}}</p>
+              <div class="d-flex" *ngIf="nom[i]">
+                <input type="text" [(ngModel)]="usuario.nombre" class="form-control mr-1">
+                <button type="button" class="btn-primary btn-sm mr-1" (click)="clickSave(i,'nombre',usuario)"><i
+                    class="mdi mdi-check"></i></button>
+              </div>
+            </td>
+            <td>
+              <p (click)="clickNom(i,'email',usuario)" *ngIf="!email[i]">{{usuario.correo}}</p>
+              <div class="d-flex" *ngIf="email[i]">
+                <input type="text" [(ngModel)]="usuario.correo" class="form-control mr-1">
+                <button type="button" class="btn-primary btn-sm mr-1" (click)="clickSave(i,'email',usuario)"><i
+                    class="mdi mdi-check"></i></button>
+              </div>
+            </td>
+            <td>
+              <p (click)="clickNom(i,'telefono',usuario)" *ngIf="!telefono[i]">{{usuario.telefono}}</p>
+              <div class="d-flex" *ngIf="telefono[i]">
+                <input type="text" [(ngModel)]="usuario.telefono" class="form-control mr-1">
+                <button type="button" class="btn-primary btn-sm mr-1" (click)="clickSave(i,'telefono',usuario)"><i
+                    class="mdi mdi-check"></i></button>
+              </div>
+            </td>
+            <td>
+              {{usuario.fecha}}
+            </td>
+            <td>
+              <select [(ngModel)]="usuario.estado" class="form-control" (change)="cambiarEstado(usuario)">
+                <option value="NoAtendida">No atendido</option>
+                <option value="empaquetado">empaquetado</option>
+                <option value="enviado">enviado</option>
+                <option value="completado">completado</option>
+              </select>
+            </td>
+            <td>
+              <select [(ngModel)]="usuario.pagado" class="form-control" (change)="cambiarPagado(usuario)">
+                <option value="true">Pagado</option>
+                <option value="false">Por Procesar</option>
+              </select>
+            </td>
+            <td class="text-center">
+              {{usuario.Total}}
+            </td>
+            <td class="text-nowrap text-center">
+              <button
+              [routerLink]="['../detallePedido',usuario.uid]"
+              type="button" class="btn btn-primary mr-1"><i class="fa fa-search"></i></button>
+              <button (click)="eliminar(usuario)" type="button" class="btn btn-danger"><i
+                  class="fa fa-close"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="" *ngIf="txtTermino.value==''">
+      <button type="button" class="btn btn-outline-primary mr-3" (click)="cambiarPagina(-5)">atras</button>
+      <button type="button" class="btn btn-outline-primary" (click)="cambiarPagina(5)">siguiente</button>
+    </div>
+  </div>
+</div>
+<pre>
+
+ </pre>

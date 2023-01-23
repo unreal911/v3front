@@ -10,7 +10,11 @@ import { PagesModule } from './pages/pages.module';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeES from '@angular/common/locales/es';
 
+registerLocaleData(localeES, 'es');
 
 
 @NgModule({
@@ -34,7 +38,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'es' }
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
