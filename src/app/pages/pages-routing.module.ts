@@ -8,6 +8,7 @@ import { ProductosComponent } from './mantenimiento/productos/productos.componen
 import { TallaComponent } from './mantenimiento/talla/talla.component';
 import { CrearComponent } from './mantenimiento/usuarios/crear/crear.component';
 import { UsuariosComponent } from './mantenimiento/usuarios/usuarios.component';
+import { VentaComponent } from './mantenimiento/venta/venta.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { PrincipalComponent } from './principal/principal.component';
 
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path: 'producto/:id', component: CrearProductoComponent },
   { path: 'tallas', component: TallaComponent },
   { path: 'pedidos', component: PedidoComponent },
-  { path: 'detallePedido/:id', component: DetallePedidoComponent }
+  { path: 'detallePedido/:id', component: DetallePedidoComponent },
+  { path: 'venta', component: VentaComponent }
 ];
 
 @NgModule({

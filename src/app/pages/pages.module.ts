@@ -19,12 +19,19 @@ import { ToastrModule } from 'ngx-toastr';
 import { CrearProductoComponent } from './mantenimiento/productos/crear-producto/crear-producto.component';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
+
 import { MatListModule } from '@angular/material/list';
+import {MatAutocompleteModule} from '@angular/material/autocomplete'
+
 import { PipesModule } from '../pipes/pipes.module';
 import { MantenimientoComponent } from './mantenimiento/mantenimiento.component';
 import { TallaComponent } from './mantenimiento/talla/talla.component';
 import { PedidoComponent } from './mantenimiento/pedido/pedido.component';
 import { DetallePedidoComponent } from './mantenimiento/pedido/detalle-pedido/detalle-pedido.component';
+import { VentaComponent } from './mantenimiento/venta/venta.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from "@angular/material/form-field";
+
 
 @NgModule({
   declarations: [
@@ -40,6 +47,7 @@ import { DetallePedidoComponent } from './mantenimiento/pedido/detalle-pedido/de
     TallaComponent,
     PedidoComponent,
     DetallePedidoComponent,
+    VentaComponent,
 
   ],
   imports: [
@@ -53,7 +61,12 @@ import { DetallePedidoComponent } from './mantenimiento/pedido/detalle-pedido/de
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(),
     DragDropModule,
+
     MatListModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule,
+    
     PipesModule
   ],
   exports: [

@@ -1,41 +1,52 @@
 <aside class="left-sidebar">
   <!-- Sidebar scroll-->
   <div class="scroll-sidebar ps ps--theme_default ps--active-y" data-ps-id="25ded36b-5539-df05-ea29-84cc30b907c0">
-      <!-- Sidebar navigation-->
-      <nav class="sidebar-nav active">
-          <ul id="sidebarnav" class="in">
-              <li class="user-profile"> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img [src]="usuariox.img.secure_url || 'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg'"alt="user"><span class="hide-menu">{{usuariox.nombre | cortarNombres}} </span></a>
-                  <ul aria-expanded="false" class="collapse">
-                      <li><a href="javascript:void()" [routerLink]="['perfil']" routerLinkActive="active" >Perfil </a></li>
-                      <li><a href="javascript:void()">My Balance</a></li>
-                      <li><a href="javascript:void()">Inbox</a></li>
-                      <li><a href="javascript:void()">Account Setting</a></li>
-                      <li><a href="javascript:void()">Logout</a></li>
-                  </ul>
-              </li>
-              <li class="nav-devider"></li>
-              <li class="nav-small-cap">MANTENIMEINTO</li>
-              <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
-                  <ul aria-expanded="false" class="collapse">
-                      <li><a [routerLink]="['usuarios']" routerLinkActive="active" >Usuarios </a></li>
-                      <li><a [routerLink]="['categorias']" routerLinkActive="active">Categorias</a></li>
-                      <li><a [routerLink]="['productos']" routerLinkActive="active">Productos</a></li>
-                      <li><a [routerLink]="['tallas']" routerLinkActive="active">Tallas</a></li>
-                  </ul>
-              </li>
-              <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Venta</span></a>
-                  <ul aria-expanded="false" class="collapse">
-                      <li><a [routerLink]="['pedidos']" routerLinkActive="active" >Pedidos</a></li>
-                      <li><a href="app-chat.html">Chat app</a></li>
-                      <li><a href="app-ticket.html">Support Ticket</a></li>
-                      <li><a href="app-contact.html">Contact / Employee</a></li>
-                      <li><a href="app-contact2.html">Contact Grid</a></li>
-                      <li><a href="app-contact-detail.html">Contact Detail</a></li>
-                  </ul>
-              </li>
+    <!-- Sidebar navigation-->
+    <nav class="sidebar-nav active">
+      <ul id="sidebarnav" class="in">
+        <li class="user-profile"> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img
+              [src]="usuariox.img.secure_url || 'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg'"
+              alt="user"><span class="hide-menu">{{usuariox.nombre | cortarNombres}} </span></a>
+          <ul aria-expanded="false" class="collapse">
+            <li><a href="javascript:void()" [routerLink]="['perfil']" routerLinkActive="active">Perfil </a></li>
+            <li><a href="javascript:void()">My Balance</a></li>
+            <li><a href="javascript:void()">Inbox</a></li>
+            <li><a href="javascript:void()">Account Setting</a></li>
+            <li><a href="javascript:void()">Logout</a></li>
           </ul>
-      </nav>
-      <!-- End Sidebar navigation -->
-  <div class="ps__scrollbar-x-rail" style="left: 0px; bottom: -422px;"><div class="ps__scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__scrollbar-y-rail" style="top: 422px; height: 829px; right: 0px;"><div class="ps__scrollbar-y" tabindex="0" style="top: 280px; height: 549px;"></div></div></div>
+        </li>
+        <li class="nav-devider"></li>
+        <li class="nav-small-cap">MANTENIMEINTO</li>
+        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+              class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard <span
+                class="label label-rouded label-themecolor pull-right">4</span></span></a>
+          <ul aria-expanded="false" class="collapse">
+            <li><a [routerLink]="['usuarios']" routerLinkActive="active">Usuarios </a></li>
+            <li><a [routerLink]="['categorias']" routerLinkActive="active">Categorias</a></li>
+            <li><a [routerLink]="['productos']" routerLinkActive="active">Productos</a></li>
+            <li><a [routerLink]="['tallas']" routerLinkActive="active">Tallas</a></li>
+          </ul>
+        </li>
+        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+              class="mdi mdi-bullseye"></i><span class="hide-menu">Venta</span></a>
+          <ul aria-expanded="false" class="collapse">
+            <li><a [routerLink]="['pedidos']" routerLinkActive="active">Pedidos</a></li>
+            <li><a [routerLink]="['venta']" routerLinkActive="active">Generar Venta</a></li>
+            <li><a href="app-ticket.html">Support Ticket</a></li>
+            <li><a href="app-contact.html">Contact / Employee</a></li>
+            <li><a href="app-contact2.html">Contact Grid</a></li>
+            <li><a href="app-contact-detail.html">Contact Detail</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <!-- End Sidebar navigation -->
+    <div class="ps__scrollbar-x-rail" style="left: 0px; bottom: -422px;">
+      <div class="ps__scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+    </div>
+    <div class="ps__scrollbar-y-rail" style="top: 422px; height: 829px; right: 0px;">
+      <div class="ps__scrollbar-y" tabindex="0" style="top: 280px; height: 549px;"></div>
+    </div>
+  </div>
   <!-- End Sidebar scroll-->
 </aside>

@@ -34,7 +34,7 @@ export class PedidoComponent implements OnInit {
       this.mostrarAlerta = false
       return;
     }
-    this.busquedaService.busquedaColeccion(termino, 'usuarios').subscribe({
+    this.busquedaService.busquedaColeccion(termino, 'pedidos').subscribe({
       next: (r: any) => {
         this.mostrarAlerta = false
         //   console.log(r)
