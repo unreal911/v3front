@@ -22,7 +22,8 @@
             <address>
               <h3>To,</h3>
               <h4 class="font-bold">
-                <p (click)="clickShow('nombre')" *ngIf="!nombreCliente">{{pedido.nombre}}</p>
+                <p style="cursor: pointer;"
+                (click)="clickShow('nombre')" *ngIf="!nombreCliente">{{pedido.nombre}}</p>
                 <div class="input-group" *ngIf="nombreCliente">
                   <input type="text" class="form-control" [(ngModel)]="pedido.nombre" #txtnombrePedido>
                   <span class="input-group-btn">
@@ -30,7 +31,9 @@
                         class="mdi mdi-check"></i></button></span>
                 </div>
               </h4>
-              <p class="text-muted m-l-30" (click)="clickShow('direccion')" *ngIf="!direccionCliente">
+              <p
+              style="cursor: pointer;"
+              class="text-muted m-l-30" (click)="clickShow('direccion')" *ngIf="!direccionCliente">
                 {{pedido.direccion}}
               </p>
               <div class="input-group" *ngIf="direccionCliente">
@@ -59,15 +62,44 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of detallePedido">
+                <tr *ngFor="let item of detallePedido;let i=index">
                   <td class="text-center">1</td>
                   <td>
-                    <p>{{item.nombre}}</p>
+                    <p *ngIf="!nombreProducto[i]" (click)="clickshowTable(i,item.producto,'nombre')">{{item.nombre}}</p>
+                    <div class="input-group" *ngIf="nombreProducto[i]">
+                      <select [(ngModel)]="item.producto" class="form-control"
+                        (change)="clicksaveTable(item.uid,i,item.producto,'nombre')">
+                        <option *ngFor="let prod of producto" [value]="prod.uid">{{prod.nombre}}</option>
+                      </select>
+                      <span class="input-group-btn">
+                        <button type="button" class="btn  btn-primary" (click)="cerrarCombo(i)"> x</button>
+                      </span>
+                    </div>
+
+
+
                   </td>
-                  <td>{{item.color}}</td>
-                  <td>{{item.talla}}</td>
-                  <td class="text-right">{{item.cantidad}} </td>
-                  <td class="text-right"> {{item.precio}} </td>
+                  <td>
+                    <p style="cursor: pointer;" *ngIf="!colorProducto[i]" (click)="clickshowTable(i,item.color,'color')">{{item.color}}</p>
+                    <input *ngIf="colorProducto[i]" type="text" [(ngModel)]="item.color" class="form-control"
+                      (keyup.enter)="clicksaveTable(item.uid,i,item.color,'color')">
+                  </td>
+                  <td>
+                    <p style="cursor: pointer;" *ngIf="!tallaProducto[i]" (click)="clickshowTable(i,item.talla,'talla')">{{item.talla}}</p>
+                    <input *ngIf="tallaProducto[i]" type="text" [(ngModel)]="item.talla" class="form-control"
+                      (keyup.enter)="clicksaveTable(item.uid,i,item.talla,'talla')">
+                  </td>
+                  <td class="text-right">
+                    <p  style="cursor: pointer;" *ngIf="!cantidadProducto[i]" (click)="clickshowTable(i,item.cantidad,'cantidad')">
+                      {{item.cantidad}}</p>
+                    <input *ngIf="cantidadProducto[i]" type="number" [(ngModel)]="item.cantidad" class="form-control"
+                      (keyup.enter)="clicksaveTable(item.uid,i,item.cantidad,'cantidad')">
+                  </td>
+                  <td class="text-right">
+                    <p  style="cursor: pointer;" *ngIf="!precioProducto[i]" (click)="clickshowTable(i,item.precio,'precio')">{{item.precio}}</p>
+                    <input *ngIf="precioProducto[i]" type="number" [(ngModel)]="item.precio" class="form-control"
+                      (keyup.enter)="clicksaveTable(item.uid,i,item.precio,'precio')">
+                  </td>
                   <td class="text-right"> {{item.subtotal}} </td>
                 </tr>
               </tbody>

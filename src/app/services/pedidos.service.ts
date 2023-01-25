@@ -39,12 +39,17 @@ export class PedidosService {
     const url = `${api_url}/pedido/${uid}`
     return this.http.delete(url, this.headers)
   }
+
+  PedidoID(uid: string) {
+    const url = `${api_url}/pedido/${uid}`
+    return this.http.get(url, this.headers)
+  }
   listarDetallePorPedido(uid: string, desde: number, limite: number) {
     const url = `${api_url}/detallepedido/listar/${uid}/${desde}/${limite}`
     return this.http.get(url, this.headers)
   }
-  PedidoID(uid: string) {
-    const url = `${api_url}/pedido/${uid}`
-    return this.http.get(url, this.headers)
+  editarDetallePedido(uid: string, body: any) {
+    const url = `${api_url}/detallepedido/${uid}`
+    return this.http.put(url, body, this.headers)
   }
 }
