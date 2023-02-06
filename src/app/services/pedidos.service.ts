@@ -39,7 +39,6 @@ export class PedidosService {
     const url = `${api_url}/pedido/${uid}`
     return this.http.delete(url, this.headers)
   }
-
   PedidoID(uid: string) {
     const url = `${api_url}/pedido/${uid}`
     return this.http.get(url, this.headers)
@@ -51,5 +50,15 @@ export class PedidosService {
   editarDetallePedido(uid: string, body: any) {
     const url = `${api_url}/detallepedido/${uid}`
     return this.http.put(url, body, this.headers)
+  }
+  crearVentaPedido(body: any) {
+    const url = `${api_url}/pedido`
+    return this.http.post(url, body, this.headers).pipe(
+  
+    )
+  }
+  crearDetalleVentaPedido(body: any) {
+    const url = `${api_url}/detallepedido`
+    return this.http.post(url, body, this.headers)
   }
 }
