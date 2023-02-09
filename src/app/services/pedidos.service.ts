@@ -54,11 +54,15 @@ export class PedidosService {
   crearVentaPedido(body: any) {
     const url = `${api_url}/pedido`
     return this.http.post(url, body, this.headers).pipe(
-  
+
     )
   }
   crearDetalleVentaPedido(body: any) {
     const url = `${api_url}/detallepedido`
+    return this.http.post(url, body, this.headers)
+  }
+  crearDetalleVentaPedidoP(body: any) {
+    const url = `${api_url}/detallepedido/dventa`
     return this.http.post(url, body, this.headers)
   }
 }

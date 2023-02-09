@@ -93,44 +93,38 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let product of formPedido.controls.arrayProductos.controls; let i = index"
-
-               >
+              <tr *ngFor="let product of formPedido.controls.arrayProductos.controls; let i = index">
                 <th>1</th>
                 <td>
-                  <select class="form-control" required [formControl]="product.get('producto')"
-                  [ngClass]="getColorClass(product.get('producto'))"
-                  >
+                  <select class="form-control" (change)="setearPrecio(valorcmb.value,i)" #valorcmb required
+                    [formControl]="product.get('producto')" [ngClass]="getColorClass(product.get('producto'))">
                     <option *ngFor="let ite of cmbProduct" [value]="ite.uid">{{ite.nombre}}</option>
                   </select>
                 </td>
                 <td>
-                  <input
-                  [ngClass]="getColorClass(product.get('color'))"
-                  type="text" class="form-control" placeholder="Color" [formControl]="product.get('color')">
+                  <input [ngClass]="getColorClass(product.get('color'))" type="text" class="form-control"
+                    placeholder="Color" [formControl]="product.get('color')">
                 </td>
                 <td>
-                  <input
-                  [ngClass]="getColorClass(product.get('talla'))"
-                  type="text" class="form-control" placeholder="Talla" [formControl]="product.get('talla')">
+                  <input [ngClass]="getColorClass(product.get('talla'))" type="text" class="form-control"
+                    placeholder="Talla" [formControl]="product.get('talla')">
                 </td>
                 <td>
-                  <input
-                  [ngClass]="getColorClass(product.get('cantidad'))"
-                  type="number" class="form-control" [formControl]="product.get('cantidad')">
+                  <input [ngClass]="getColorClass(product.get('cantidad'))" type="number" class="form-control"
+                    [formControl]="product.get('cantidad')">
                 </td>
                 <td>
-                  <input
-                  [ngClass]="getColorClass(product.get('precio'))"
-                  type="number" class="form-control" [formControl]="product.get('precio')">
+                  <input [(ngModel)]="precioSeleccionado[i]" [ngClass]="getColorClass(product.get('precio'))"
+                    type="number" class="form-control" [formControl]="product.get('precio')">
                 </td>
                 <td>
                   <input type="number" class="form-control" disabled
-                    [value]="product.get('cantidad').value* product.get('precio').value"
-                  >
+                    [value]="product.get('cantidad').value* product.get('precio').value">
                 </td>
                 <td class="text-nowrap">
-                  <button class="btn btn-info">X</button>
+                  <button
+                  (click)="eliminarFila(i)"
+                  type="button" class="btn btn-info">X</button>
                 </td>
               </tr>
             </tbody>
