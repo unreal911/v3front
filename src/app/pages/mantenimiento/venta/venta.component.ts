@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import Swal from 'sweetalert2';
@@ -25,7 +26,8 @@ export class VentaComponent implements OnInit {
   constructor(
     private productoServices: ProductoService,
     private fb: FormBuilder,
-    private pedidoService: PedidosService
+    private pedidoService: PedidosService,
+    private router:Router
   ) { }
   ngOnInit(): void {
     this.listarProductos()
@@ -79,7 +81,7 @@ export class VentaComponent implements OnInit {
             }
           })
         }
-        
+          this.router.navigateByUrl('/principal/detallePedido/'+n.pedido.uid)
       },
       error: (e) => {
         console.log(e)

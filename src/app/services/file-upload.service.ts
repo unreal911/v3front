@@ -32,6 +32,12 @@ export class FileUploadService {
     const url = `${api_url}/uploads/${uid}`
     return this.http.post(url, formData, this.headers)
   }
+  subirArchivoColeccion(uid: string, file: any, coleccion: 'usuarios' | 'productos' | 'categorias' | 'slider') {
+    const formData = new FormData()
+    formData.append('img', file)
+    const url = `${api_url}/uploads/${coleccion}/${uid}`
+    return this.http.post(url, formData, this.headers)
+  }
   eliminarArchivo(uid: string, public_id: string) {
     const url = `${api_url}/uploads/${uid}`
     return this.http.delete(url, {

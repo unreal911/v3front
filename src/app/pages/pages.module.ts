@@ -31,6 +31,7 @@ import { DetallePedidoComponent } from './mantenimiento/pedido/detalle-pedido/de
 import { VentaComponent } from './mantenimiento/venta/venta.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { SliderComponent } from './mantenimiento/slider/slider.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
     PedidoComponent,
     DetallePedidoComponent,
     VentaComponent,
+    SliderComponent,
 
   ],
   imports: [

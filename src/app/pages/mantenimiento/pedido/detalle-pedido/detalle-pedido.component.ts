@@ -46,7 +46,7 @@ export class DetallePedidoComponent implements OnInit {
         return;
       }
 
-      this.productoService.listarProducto(0, 10).subscribe((res: any) => {
+      this.productoService.listarProducto(0, 100).subscribe((res: any) => {
         this.producto = res.productos;
         this.filteredStates = this.stateCtrl.valueChanges.pipe(
           startWith(''),
@@ -316,7 +316,6 @@ export class DetallePedidoComponent implements OnInit {
 
 
   }
-
   ngOnInit(): void {
 
     this.cargarpedido()

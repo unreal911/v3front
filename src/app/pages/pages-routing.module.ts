@@ -5,6 +5,7 @@ import { DetallePedidoComponent } from './mantenimiento/pedido/detalle-pedido/de
 import { PedidoComponent } from './mantenimiento/pedido/pedido.component';
 import { CrearProductoComponent } from './mantenimiento/productos/crear-producto/crear-producto.component';
 import { ProductosComponent } from './mantenimiento/productos/productos.component';
+import { SliderComponent } from './mantenimiento/slider/slider.component';
 import { TallaComponent } from './mantenimiento/talla/talla.component';
 import { CrearComponent } from './mantenimiento/usuarios/crear/crear.component';
 import { UsuariosComponent } from './mantenimiento/usuarios/usuarios.component';
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path: 'tallas', component: TallaComponent },
   { path: 'pedidos', component: PedidoComponent },
   { path: 'detallePedido/:id', component: DetallePedidoComponent },
-  { path: 'venta', component: VentaComponent }
+  { path: 'venta', component: VentaComponent },
+  { path: 'slider', component: SliderComponent }
 ];
 
 @NgModule({

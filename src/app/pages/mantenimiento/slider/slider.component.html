@@ -1,0 +1,100 @@
+<div class="card text-center">
+  <div class="card-body">
+    <h4 class="card-title text-primary">Sliders</h4>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <div class="text-center mb-2">
+      <button type="button" name="" id="" class="btn btn-primary" data-toggle="modal" (click)="abrirModal()"
+        data-target="#exampleModal">Crear</button>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>img</th>
+            <th>titulo</th>
+            <th>subtitulo</th>
+            <th>estado</th>
+            <th class="text-nowrap">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let slider of sliders;let i=index" >
+            <td>
+              <img [src]="slider.img.secure_url" alt="" style="width: 100px;">
+            </td>
+            <td>{{slider.titulo}}</td>
+            <td>{{slider.subtitulo}}</td>
+            <td>{{slider.estado}}</td>
+            <td class="text-nowrap">
+              <button type="button" name="" id="" class="btn btn-primary mr-1" (click)="editarSlider(slider)"><i
+                  class="fa fa-pencil"></i></button>
+              <button
+              (click)="eliminarSlider(slider,i)"
+              type="button" name="" id="" class="btn btn-primary"
+              ><i class="fa fa-close"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cerrarModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form (ngSubmit)="GuardarCambios()" [formGroup]="formSlider">
+        <div class="modal-body">
+          <div class="form-group d-flex justify-content-center">
+            <div class="checkbox checkbox-success">
+              <input id="checkbox10" type="checkbox" formControlName="estado">
+              <label for="checkbox10"> Slider Activo </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="titulo" formControlName="titulo">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="subtitulo" formControlName="subtitulo">
+          </div>
+          <div formGroupName="botonproducto">
+            <div class="form-group d-flex justify-content-center">
+              <div class="checkbox checkbox-success">
+                <input id="checkbox1" type="checkbox" formControlName="visible">
+                <label for="checkbox1"> boton Activo </label>
+              </div>
+            </div>
+            <div class="form-group"> <input type="text" class="form-control" placeholder="texto del boton"
+                formControlName="textbtn" *ngIf="cambiarvisible()">
+            </div>
+            <div class="form-group"><input type="text" class="form-control" placeholder="urlBoton"
+                formControlName="urlbtn" *ngIf="cambiarvisible()">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cerrarModal()">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
+      <div class="image-upload">
+        <label for="file-input" style="margin-bottom: 0%;">
+          <img *ngIf="!imgTemp"
+            [src]="(sliderSelecionado.img  | imgSlider)  || 'https://lyon.palmaresdudroit.fr/images/joomlart/demo/default.jpg'"
+            class="img-fluid" />
+          <img *ngIf="imgTemp" [src]="imgTemp" class="img-fluid" />
+        </label>
+        <input type="file" name="" id="file-input" (change)="cambiarImagen($event)" />
+      </div>
+    </div>
+  </div>
+</div>
