@@ -113,9 +113,10 @@ export class CrearProductoComponent implements OnInit {
       title: 'Cargando',
       showConfirmButton: false,
       didOpen(popup) {
-        Swal.showLoading(
-          Swal.getDenyButton()
-        );
+        const denyButton = Swal.getDenyButton();
+        if (denyButton) {
+          Swal.showLoading(denyButton);
+        }
       },
     })
 
@@ -180,9 +181,10 @@ export class CrearProductoComponent implements OnInit {
         title: 'Cargando',
         showConfirmButton: false,
         didOpen(popup) {
-          Swal.showLoading(
-            Swal.getDenyButton()
-          );
+          const denyButton = Swal.getDenyButton();
+          if (denyButton) {
+            Swal.showLoading(denyButton);
+          }
         },
       })
       this.fileUploadService.eliminarArchivo(this.id, this.ListarImg[i].id).subscribe({

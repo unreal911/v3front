@@ -43,9 +43,10 @@ export class PerfilComponent implements OnInit {
       title: 'Cargando',
       showConfirmButton:false,
       didOpen(popup) {
-        Swal.showLoading(
-          Swal.getDenyButton()
-        );
+        const denyButton = Swal.getDenyButton();
+        if (denyButton) {
+          Swal.showLoading(denyButton);
+        }
       },
     })
 
@@ -55,7 +56,7 @@ export class PerfilComponent implements OnInit {
         Swal.close()
         Swal.fire('Completado','imagen subida con exito','success')
       },
-      
+
       error: (e) => { console.log(e) }
     })
   }

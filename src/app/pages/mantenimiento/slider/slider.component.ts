@@ -84,9 +84,10 @@ export class SliderComponent implements OnInit {
         title: 'Cargando',
         showConfirmButton:false,
         didOpen(popup) {
-          Swal.showLoading(
-            Swal.getDenyButton()
-          );
+          const denyButton = Swal.getDenyButton();
+          if (denyButton) {
+            Swal.showLoading(denyButton);
+          }
         },
       })
       this.sliderService.editarSlider(this.sliderSelecionado.uid, this.formSlider.value).subscribe({
@@ -116,9 +117,10 @@ export class SliderComponent implements OnInit {
         title: 'Cargando',
         showConfirmButton:false,
         didOpen(popup) {
-          Swal.showLoading(
-            Swal.getDenyButton()
-          );
+          const denyButton = Swal.getDenyButton();
+          if (denyButton) {
+            Swal.showLoading(denyButton);
+          }
         },
       })
       this.sliderService.editarSlider(this.sliderSelecionado.uid, this.formSlider.value).subscribe({
@@ -187,9 +189,10 @@ export class SliderComponent implements OnInit {
       title: 'Cargando',
       showConfirmButton:false,
       didOpen(popup) {
-        Swal.showLoading(
-          Swal.getDenyButton()
-        );
+        const denyButton = Swal.getDenyButton();
+        if (denyButton) {
+          Swal.showLoading(denyButton);
+        }
       },
     })
     this.sliderService.crearSlider(this.formSlider.value).subscribe({
@@ -252,9 +255,10 @@ export class SliderComponent implements OnInit {
       title: 'Cargando',
       showConfirmButton:false,
       didOpen(popup) {
-        Swal.showLoading(
-          Swal.getDenyButton()
-        );
+        const denyButton = Swal.getDenyButton();
+        if (denyButton) {
+          Swal.showLoading(denyButton);
+        }
       },
     })
     this.sliderService.eliminarSlider(slider).subscribe({

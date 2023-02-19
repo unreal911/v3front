@@ -246,7 +246,7 @@ export class PedidoComponent implements OnInit {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Si, eliminar!'
-    }).then((result) => {
+    }).then((result:any) => {
       if (result.isConfirmed) {
         this.pedidosServices.eliminar(pedido.uid).subscribe(
           {
