@@ -15,6 +15,7 @@ import { PrincipalComponent } from './principal/principal.component';
 
 const routes: Routes = [
   { path: '', component: PrincipalComponent },
+  { path:'principal',component:PrincipalComponent},
   { path: 'usuarios', component: UsuariosComponent },
   { path: 'categorias', component: CategoriasComponent },
   { path: 'productos', component: ProductosComponent },

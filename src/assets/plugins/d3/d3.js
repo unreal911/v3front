@@ -1,5 +1,7 @@
 // https://d3js.org Version 4.9.1. Copyright 2017 Mike Bostock.
-(function (global, factory) {
+
+const initd3=()=>{
+  (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
 	(factory((global.d3 = global.d3 || {})));
@@ -16471,7 +16473,7 @@ var zoom = function() {
   zoom.clickDistance = function(_) {
     return arguments.length ? (clickDistance2 = (_ = +_) * _, zoom) : Math.sqrt(clickDistance2);
   };
-    
+
   return zoom;
 };
 
@@ -16864,3 +16866,6 @@ exports.zoomIdentity = identity$8;
 Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
+}
+
+initd3()

@@ -3,6 +3,7 @@ import { AbstractControl, FormArray, FormBuilder, Validators } from '@angular/fo
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { ProductoService } from 'src/app/services/producto.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -27,7 +28,8 @@ export class VentaComponent implements OnInit {
     private productoServices: ProductoService,
     private fb: FormBuilder,
     private pedidoService: PedidosService,
-    private router:Router
+    private router:Router,
+    private usuarioService:UsuarioService
   ) { }
   ngOnInit(): void {
     this.listarProductos()
@@ -38,6 +40,7 @@ export class VentaComponent implements OnInit {
       direccion: ['', [Validators.required]],
       departamento: ['', [Validators.required]],
       tipoventa: ['VentaGenerada'],
+      usuario:[this.usuarioService.usuario.uid],
       arrayProductos: this.fb.array([
 
       ])

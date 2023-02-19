@@ -3,7 +3,7 @@ import { BusquedaService } from 'src/app/services/busqueda.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
-
+import { filtrosAgregados } from '../../../interfaces/filtro'
 @Component({
   selector: 'app-pedido',
   templateUrl: './pedido.component.html',
@@ -23,9 +23,85 @@ export class PedidoComponent implements OnInit {
   constructor(private busquedaService: BusquedaService,
     private pedidosServices: PedidosService,
     private toastr: ToastrService) { }
+  tipoventa = ['SinDefinir', 'VentaWeb', 'VentaGenerada'];
+  pagado = [{
+    texto: 'PorProcesar',
+    valor: false
+  },
+  {
+    texto: 'pagado',
+    valor: true
+  },
+  ]
+  filtrosAgregados = {
+    pagado: [],
+    tipoventa: [],
+    rangoFechas: {
+      fechaFin: '',
+      fechaInicio: ''
+    }
 
+  }
+  filtroMongo: filtrosAgregados = {
+    pagado: {
+      $in: []
+    },
+    tipoventa: {
+      $in: []
+    },
+    fecha: {
+      $gte: '',
+      $lte: ''
+    }
+  };
+  fechaValor(valor: string, tipofecha: string) {
+    if (tipofecha == 'inicio') {
+      this.filtroMongo.fecha!.$gte = valor
+    } else {
+      this.filtroMongo.fecha!.$lte = valor
+    }
+    console.log(this.filtroMongo)
+  }
   ngOnInit(): void {
     this.listarPedidos()
+  }
+  agregarFiltros(tipoFiltro: string, valor: any) {
+    if (tipoFiltro == 'tipoventa') {
+      let encontrarFiltros = this.filtroMongo.tipoventa!.$in.find(r => r == valor)
+      if (!encontrarFiltros) {
+        this.filtroMongo.tipoventa!.$in.push(valor)
+      } else {
+        //this.filtroMongo.tipoventa?.$in!= this.filtroMongo.tipoventa?.$in.filter(tipo => tipo != valor)
+        this.filtroMongo.tipoventa!.$in = this.filtroMongo.tipoventa!.$in.filter(tipo=>tipo!=valor)
+      }
+    } else if (tipoFiltro == 'pagado') {
+      let encontrarFiltros = this.filtroMongo.pagado!.$in.find(r => r == valor)
+      if (!encontrarFiltros) {
+        this.filtroMongo.pagado!.$in.push(valor)
+      } else {
+        this.filtroMongo.pagado!.$in = this.filtroMongo.pagado!.$in.filter(tipo => tipo != valor)
+      }
+    }
+    console.log(this.filtroMongo)
+  }
+  enviarFiltro() {
+    //TODO: HACER ESTA CONDICIONAL EN EL BACKEND
+
+ //TODO: falta condicional pagado
+    this.busquedaService.getFiltro(this.filtroMongo).subscribe({
+      next: (r:any) => {
+        this.pedidos=r.filtrarPedido
+        console.log(r.filtrarPedido)
+      }, error: (e) => {
+        console.log(e)
+      }
+    })
+    /* if (this.filtrosAgregados.pagado!.length == 0) {
+       delete this.filtrosAgregados.pagado
+     }else if(this.filtrosAgregados.rangoFechas?.fechaFin=='' && this.filtrosAgregados.rangoFechas.fechaInicio==''){
+       delete this.filtrosAgregados.rangoFechas
+     }*/
+    //TODO: crear y llamar un servicio que pueda enviar el objeto this.filtrosAgregados
   }
   buscar(termino: string) {
     // console.log(termino)
@@ -72,7 +148,9 @@ export class PedidoComponent implements OnInit {
       }
       this.pedidosServices.actualizarPedido(pedido.uid, { nombre: pedido.nombre }).subscribe(
         {
-          next: (r) => { console.log(r) },
+          next: (r) => {
+            this.toastr.success('Cambio realizado!!!', 'Se cambio el Contenido');
+            console.log(r) },
           error: (e) => {
             if (!e.error.errors) {
               Swal.fire('Error', e.error.msg, 'error')
@@ -93,7 +171,10 @@ export class PedidoComponent implements OnInit {
       }
       this.pedidosServices.actualizarPedido(pedido.uid, { correo: pedido.correo }).subscribe(
         {
-          next: (r) => { console.log(r) },
+          next: (r) => {
+            this.toastr.success('Cambio realizado!!!', 'Se cambio el Contenido');
+            console.log(r)
+          },
           error: (e) => {
             if (!e.error.errors) {
               Swal.fire('Error', e.error.msg, 'error')
@@ -114,7 +195,9 @@ export class PedidoComponent implements OnInit {
       }
       this.pedidosServices.actualizarPedido(pedido.uid, { telefono: pedido.telefono }).subscribe(
         {
-          next: (r) => { console.log(r) },
+          next: (r) => {
+            this.toastr.success('Cambio realizado!!!', 'Se cambio el Contenido');
+            console.log(r) },
           error: (e) => {
             if (!e.error.errors) {
               Swal.fire('Error', e.error.msg, 'error')
@@ -204,8 +287,8 @@ export class PedidoComponent implements OnInit {
       }
     )
   }
-  cambiarPagado(pedido:any){
-    this.pedidosServices.cambiarPagado(pedido.uid,{pagado:pedido.pagado}).subscribe({
+  cambiarPagado(pedido: any) {
+    this.pedidosServices.cambiarPagado(pedido.uid, { pagado: pedido.pagado }).subscribe({
       next: (r) => {
         console.log(r)
         this.toastr.success('Cambio realizado!!!', 'Se cambio el estado Pagado');

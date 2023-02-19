@@ -4,11 +4,12 @@ Author: Wrappixel
 Email: niravjoshi87@gmail.com
 File: js
 */
-$(function () {
+const initdashboard3=()=>{
+  $(function () {
     "use strict";
-    // ============================================================== 
+    // ==============================================================
     // Sales overview
-    // ============================================================== 
+    // ==============================================================
      new Chartist.Line('#sales-overview2', {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']
         , series: [
@@ -30,12 +31,12 @@ $(function () {
         }
         , plugins: [
         	Chartist.plugins.tooltip()
-      	], 
+      	],
       	// As this is axis specific we need to tell Chartist to use whole numbers only on the concerned axis
         axisY: {
         	onlyInteger: true
             , showLabel: true
-            , scaleMinSpace: 50 
+            , scaleMinSpace: 50
             , showGrid: true
             , offset: 10,
             labelInterpolationFnc: function(value) {
@@ -43,12 +44,12 @@ $(function () {
 		    },
 
         }
-        
+
     });
-     // ============================================================== 
+     // ==============================================================
     // Visitor
-    // ============================================================== 
-    
+    // ==============================================================
+
     var chart = c3.generate({
         bindto: '#visitor',
         data: {
@@ -58,7 +59,7 @@ $(function () {
                 ['Tablet', 40],
                 ['Mobile', 50],
             ],
-            
+
             type : 'donut',
             onclick: function (d, i) { console.log("onclick", d, i); },
             onmouseover: function (d, i) { console.log("onmouseover", d, i); },
@@ -70,9 +71,9 @@ $(function () {
               },
             title:"Visits",
             width:20,
-            
+
         },
-        
+
         legend: {
           hide: true
           //or hide: 'data1'
@@ -82,10 +83,10 @@ $(function () {
               pattern: ['#eceff1', '#745af2', '#26c6da', '#1e88e5']
         }
     });
-  	  
-    // ============================================================== 
+
+    // ==============================================================
     // Website Visitor
-    // ============================================================== 
+    // ==============================================================
 
     var chart = new Chartist.Line('.website-visitor', {
           labels: [1, 2, 3, 4, 5, 6, 7, 8],
@@ -102,7 +103,7 @@ $(function () {
           ],
             axisY: {
             onlyInteger: true
-            , scaleMinSpace: 40    
+            , scaleMinSpace: 40
             , offset: 20
             , labelInterpolationFnc: function (value) {
                 return (value / 1) + 'k';
@@ -110,10 +111,10 @@ $(function () {
         },
         });
     	// Offset x1 a tiny amount so that the straight stroke gets a bounding box
-        // Straight lines don't get a bounding box 
+        // Straight lines don't get a bounding box
         // Last remark on -> http://www.w3.org/TR/SVG11/coords.html#ObjectBoundingBox
-        chart.on('draw', function(ctx) {  
-          if(ctx.type === 'area') {    
+        chart.on('draw', function(ctx) {
+          if(ctx.type === 'area') {
             ctx.element.attr({
               x1: ctx.x1 + 0.001
             });
@@ -138,3 +139,6 @@ $(function () {
           });
         });
 });
+}
+initdashboard3()
+

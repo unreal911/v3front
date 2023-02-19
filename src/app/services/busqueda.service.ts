@@ -20,8 +20,12 @@ export class BusquedaService {
       }
     }
   }
-  busquedaColeccion(parametro: string, coleccion: 'usuarios' | 'productos' | 'categorias' | 'tallas'|'pedidos') {
+  busquedaColeccion(parametro: string, coleccion: 'usuarios' | 'productos' | 'categorias' | 'tallas' | 'pedidos') {
     const url = `${api_url}/busqueda/coleccion/${coleccion}/${parametro}`
     return this.http.get(url, this.headers)
+  }
+  getFiltro(body: any) {
+    const url = `${api_url}/busqueda/filtro`
+    return this.http.post(url, body,this.headers)
   }
 }

@@ -68,8 +68,8 @@ import { SliderComponent } from './mantenimiento/slider/slider.component';
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
-    
-    PipesModule
+
+    PipesModule,
   ],
   exports: [
     PrincipalComponent,
