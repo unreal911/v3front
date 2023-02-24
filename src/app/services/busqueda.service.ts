@@ -26,6 +26,10 @@ export class BusquedaService {
   }
   getFiltro(body: any) {
     const url = `${api_url}/busqueda/filtro`
-    return this.http.post(url, body,this.headers)
+    return this.http.post(url, body, this.headers)
+  }
+  getSemana(body: any) {
+    const url = `${api_url}/busqueda/filtroPanel/semana`
+    return this.http.post(url,body,this.headers)
   }
 }

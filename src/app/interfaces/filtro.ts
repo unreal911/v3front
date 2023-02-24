@@ -12,3 +12,8 @@ export interface RangoFechas {
   $gte: string,
   $lte: string
 }
+export interface dataset {
+  fecha:string
+  ventaweb: number[],
+  ventagenerada: number[]
+}
