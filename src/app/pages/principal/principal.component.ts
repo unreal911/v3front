@@ -92,9 +92,7 @@ export class PrincipalComponent implements OnInit {
       next: (r: any) => {
         this.resultados = r.resultados
         console.log(this.resultados)
-
         let resultadosx: any[] = [];
-
         this.formatoSubmit.forEach(dia => {
           let objetoDia = {
             fecha: dia,

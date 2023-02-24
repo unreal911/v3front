@@ -58,7 +58,8 @@ export class PedidoComponent implements OnInit {
     if (tipofecha == 'inicio') {
       this.filtroMongo.fecha!.$gte = valor
     } else {
-      this.filtroMongo.fecha!.$lte = valor
+      const convertir = new Date(valor)
+      this.filtroMongo.fecha!.$lte = valor + ' 23:59:59.0'
     }
     console.log(this.filtroMongo)
   }
@@ -72,7 +73,7 @@ export class PedidoComponent implements OnInit {
         this.filtroMongo.tipoventa!.$in.push(valor)
       } else {
         //this.filtroMongo.tipoventa?.$in!= this.filtroMongo.tipoventa?.$in.filter(tipo => tipo != valor)
-        this.filtroMongo.tipoventa!.$in = this.filtroMongo.tipoventa!.$in.filter(tipo=>tipo!=valor)
+        this.filtroMongo.tipoventa!.$in = this.filtroMongo.tipoventa!.$in.filter(tipo => tipo != valor)
       }
     } else if (tipoFiltro == 'pagado') {
       let encontrarFiltros = this.filtroMongo.pagado!.$in.find(r => r == valor)
@@ -87,10 +88,10 @@ export class PedidoComponent implements OnInit {
   enviarFiltro() {
     //TODO: HACER ESTA CONDICIONAL EN EL BACKEND
 
- //TODO: falta condicional pagado
+    //TODO: falta condicional pagado
     this.busquedaService.getFiltro(this.filtroMongo).subscribe({
-      next: (r:any) => {
-        this.pedidos=r.filtrarPedido
+      next: (r: any) => {
+        this.pedidos = r.filtrarPedido
         console.log(r.filtrarPedido)
       }, error: (e) => {
         console.log(e)
@@ -150,7 +151,8 @@ export class PedidoComponent implements OnInit {
         {
           next: (r) => {
             this.toastr.success('Cambio realizado!!!', 'Se cambio el Contenido');
-            console.log(r) },
+            console.log(r)
+          },
           error: (e) => {
             if (!e.error.errors) {
               Swal.fire('Error', e.error.msg, 'error')
@@ -197,7 +199,8 @@ export class PedidoComponent implements OnInit {
         {
           next: (r) => {
             this.toastr.success('Cambio realizado!!!', 'Se cambio el Contenido');
-            console.log(r) },
+            console.log(r)
+          },
           error: (e) => {
             if (!e.error.errors) {
               Swal.fire('Error', e.error.msg, 'error')
@@ -246,7 +249,7 @@ export class PedidoComponent implements OnInit {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Si, eliminar!'
-    }).then((result:any) => {
+    }).then((result: any) => {
       if (result.isConfirmed) {
         this.pedidosServices.eliminar(pedido.uid).subscribe(
           {
