@@ -8,10 +8,12 @@
     <div class="card bg-info">
       <div class="card-body">
         <div class="d-flex no-block">
-          <div class="m-r-20 align-self-center"><img src="../assets/images/icon/income-w.png" alt="Income"></div>
+          <div class="m-r-20 align-self-center">
+            <img src="../assets/images/icon/income-w.png" alt="Income" />
+          </div>
           <div class="align-self-center">
             <h4 class="text-white m-t-10 m-b-0">Ventas hoy</h4>
-            <h1 class="m-t-0 text-white">953,000</h1>
+            <h1 class="m-t-0 text-white">{{ ventashoy }}</h1>
           </div>
         </div>
       </div>
@@ -21,10 +23,12 @@
     <div class="card bg-success">
       <div class="card-body">
         <div class="d-flex no-block">
-          <div class="m-r-20 align-self-center"><img src="../assets/images/icon/expense-w.png" alt="Income"></div>
+          <div class="m-r-20 align-self-center">
+            <img src="../assets/images/icon/expense-w.png" alt="Income" />
+          </div>
           <div class="align-self-center">
             <h4 class="text-white m-t-10 m-b-0">Ventas web</h4>
-            <h1 class="m-t-0 text-white">236,000</h1>
+            <h1 class="m-t-0 text-white">{{ ventasweb }}</h1>
           </div>
         </div>
       </div>
@@ -34,10 +38,12 @@
     <div class="card bg-primary">
       <div class="card-body">
         <div class="d-flex no-block">
-          <div class="m-r-20 align-self-center"><img src="../assets/images/icon/assets-w.png" alt="Income"></div>
+          <div class="m-r-20 align-self-center">
+            <img src="../assets/images/icon/assets-w.png" alt="Income" />
+          </div>
           <div class="align-self-center">
             <h4 class="text-white m-t-10 m-b-0">Ventas tienda</h4>
-            <h1 class="m-t-0 text-white">987,563</h1>
+            <h1 class="m-t-0 text-white">{{ ventastienda }}</h1>
           </div>
         </div>
       </div>
@@ -47,7 +53,9 @@
     <div class="card bg-danger">
       <div class="card-body">
         <div class="d-flex no-block">
-          <div class="m-r-20 align-self-center"><img src="../assets/images/icon/staff-w.png" alt="Income"></div>
+          <div class="m-r-20 align-self-center">
+            <img src="../assets/images/icon/staff-w.png" alt="Income" />
+          </div>
           <div class="align-self-center">
             <h4 class="text-white m-t-10 m-b-0">Por atender</h4>
             <h1 class="m-t-0 text-white">987,563</h1>
@@ -59,13 +67,16 @@
 </div>
 <div>
   <div class="chart-container">
-    <canvas  id="MyChart" >{{ chart }}</canvas>
-</div>
+    <canvas id="MyChart">{{ chart }}</canvas>
+  </div>
 </div>
 <div class="card">
   <div class="card-body">
     <h4 class="card-title">Striped Table</h4>
-    <h6 class="card-subtitle">Add<code>.table-striped</code>for borders on all sides of the table and cells.</h6>
+    <h6 class="card-subtitle">
+      Add<code>.table-striped</code>for borders on all sides of the table and
+      cells.
+    </h6>
     <div class="table-responsive">
       <table class="table table-striped">
         <thead>
@@ -75,22 +86,20 @@
             <th>Ventas hoy</th>
             <th>Ventas semana</th>
             <th>ventas del mes</th>
-            <th class="text-nowrap">Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><img src="" alt=""></td>
-            <td>nombre </td>
-            <td>ventas hoy </td>
-            <td>ventas semana </td>
-            <th>ventas mes </th>
-            <td class="text-nowrap">
-              <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i
-                  class="fa fa-pencil text-inverse m-r-10"></i> </a>
-              <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i>
-              </a>
+          <tr *ngFor="let usuario of usuariosventas">
+            <td>
+              <img [src]="
+                  usuario.img.secure_url ||
+                  'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg'
+                " alt="" width="50" class="img-circle" />
             </td>
+            <td>{{ usuario.nombre }}</td>
+            <td>{{ usuario.pedidosHoy }}</td>
+            <td>{{ usuario.pedidosSemana }}</td>
+            <td>{{ usuario.pedidosMes }}</td>
           </tr>
         </tbody>
       </table>

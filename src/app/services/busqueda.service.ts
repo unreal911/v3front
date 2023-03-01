@@ -6,9 +6,7 @@ const api_url = environment.base_url
   providedIn: 'root'
 })
 export class BusquedaService {
-
   constructor(private http: HttpClient) {
-
   }
   get token(): string {
     return localStorage.getItem('token') || '';
@@ -31,5 +29,9 @@ export class BusquedaService {
   getSemana(body: any) {
     const url = `${api_url}/busqueda/filtroPanel/semana`
     return this.http.post(url,body,this.headers)
+  }
+  getusuariosVentas(){
+    const url = `${api_url}/busqueda/filtroTabla/usuarios`
+    return this.http.get(url,this.headers)
   }
 }
