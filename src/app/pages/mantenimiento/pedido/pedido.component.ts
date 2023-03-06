@@ -26,6 +26,7 @@ export class PedidoComponent implements OnInit {
     private toastr: ToastrService
   ) {}
   tipoventa = ['SinDefinir', 'VentaWeb', 'VentaGenerada'];
+  estado=['NoAtendida','empaquetado','enviado','completado','pendiente']
   pagado = [
     {
       texto: 'PorProcesar',
@@ -55,6 +56,9 @@ export class PedidoComponent implements OnInit {
       $gte: '',
       $lte: '',
     },
+    estado:{
+      $in:[]
+    }
   };
   fechaValor(valor: string, tipofecha: string) {
     if (tipofecha == 'inicio') {
@@ -87,6 +91,17 @@ export class PedidoComponent implements OnInit {
         this.filtroMongo.pagado!.$in.push(valor);
       } else {
         this.filtroMongo.pagado!.$in = this.filtroMongo.pagado!.$in.filter(
+          (tipo) => tipo != valor
+        );
+      }
+    }else if(tipoFiltro == 'estado'){
+      let encontrarFiltros = this.filtroMongo.estado!.$in.find(
+        (r) => r == valor
+      );
+      if (!encontrarFiltros) {
+        this.filtroMongo.estado!.$in.push(valor);
+      } else {
+        this.filtroMongo.estado!.$in = this.filtroMongo.estado!.$in.filter(
           (tipo) => tipo != valor
         );
       }

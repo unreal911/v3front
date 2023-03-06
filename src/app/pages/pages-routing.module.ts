@@ -15,7 +15,7 @@ import { PrincipalComponent } from './principal/principal.component';
 
 const routes: Routes = [
   { path: '', component: PrincipalComponent },
-  { path:'principal',component:PrincipalComponent},
+  { path: 'principal', component: PrincipalComponent },
   { path: 'usuarios', component: UsuariosComponent },
   { path: 'categorias', component: CategoriasComponent },
   { path: 'productos', component: ProductosComponent },
@@ -27,11 +27,11 @@ const routes: Routes = [
   { path: 'pedidos', component: PedidoComponent },
   { path: 'detallePedido/:id', component: DetallePedidoComponent },
   { path: 'venta', component: VentaComponent },
-  { path: 'slider', component: SliderComponent }
+  { path: 'slider', component: SliderComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class PagesRoutingModule { }
+export class PagesRoutingModule {}

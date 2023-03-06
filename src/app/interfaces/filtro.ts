@@ -6,7 +6,11 @@ export interface filtrosAgregados {
   tipoventa?: {
     $in: string[]
   },
-  fecha?: RangoFechas
+  fecha?: RangoFechas,
+  estado?:{
+    $in:string[]
+  }
+
 }
 export interface RangoFechas {
   $gte: string,

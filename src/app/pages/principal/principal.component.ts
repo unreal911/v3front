@@ -68,7 +68,6 @@ export class PrincipalComponent implements OnInit {
     canvas!.height = containerHeight;
     this.chart.resize();
   }
-
   obtenerfechaActual() {
     // Obtener la fecha actual
     let today = new Date();
