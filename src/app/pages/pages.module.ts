@@ -32,7 +32,7 @@ import { VentaComponent } from './mantenimiento/venta/venta.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { SliderComponent } from './mantenimiento/slider/slider.component';
-
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 @NgModule({
   declarations: [
@@ -70,6 +70,7 @@ import { SliderComponent } from './mantenimiento/slider/slider.component';
     MatInputModule,
 
     PipesModule,
+    EditorModule
   ],
   exports: [
     PrincipalComponent,

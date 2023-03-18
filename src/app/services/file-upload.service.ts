@@ -23,7 +23,7 @@ export class FileUploadService {
       {
         after: after,
         before: before
-      }
+      },this.headers
     )
   }
   subirArchivo(uid: string, file: any, coleccion: 'usuarios' | 'productos' | 'categorias') {

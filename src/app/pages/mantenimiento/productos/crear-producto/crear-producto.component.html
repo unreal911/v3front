@@ -66,8 +66,8 @@
             <div class="form-group"
               [ngClass]="{'has-success':validarCampo('descripcion'),'has-danger':campoIncorrecto('descripcion')}">
               <label for="">Descripcion</label>
-              <textarea class="form-control" name="" id="" rows="5" formControlName="descripcion"
-                [ngClass]="{'form-control-danger':campoIncorrecto('descripcion')}"></textarea>
+
+              <editor [init]="{ plugins: 'lists link image table code help wordcount' }" formControlName="descripcion"></editor>
               <small class="form-control-feedback" *ngIf="campoIncorrecto('descripcion')">La descripcion no debe estar
                 vacia
               </small>
