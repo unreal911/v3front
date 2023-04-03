@@ -1,5 +1,7 @@
 
-
+.nohay{
+  display: none;
+}
 
 .example-list {
   width: 1000px;

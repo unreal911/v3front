@@ -46,14 +46,14 @@ export class CrearProductoComponent implements OnInit {
 
 
   }
-  borrarTalla(i:number){
-    this.tallasdisponibles.splice(i,1)
+  borrarTalla(i: number) {
+    this.tallasdisponibles.splice(i, 1)
   }
   agregarTalla(talla: any) {
     console.log(talla)
-    if(this.tallasdisponibles.includes(talla)){
+    if (this.tallasdisponibles.includes(talla)) {
       console.log('Ya tiene esta lla')
-    }else {
+    } else {
       this.tallasdisponibles.push(talla)
       console.log(this.tallasdisponibles)
     }
@@ -74,8 +74,8 @@ export class CrearProductoComponent implements OnInit {
     if (this.Producto.nombre == this.prductoForm.value.nombre) {
       delete this.prductoForm.value.nombre
     }
-    this.prductoForm.value.talla=this.tallasdisponibles
-    if(this.prductoForm.value.talla.length==0){
+    this.prductoForm.value.talla = this.tallasdisponibles
+    if (this.prductoForm.value.talla.length == 0) {
       this.toastr.error('seleccione al menos una talla!!!', 'Cambios no realizados!!!');
       return;
     }
@@ -138,6 +138,14 @@ export class CrearProductoComponent implements OnInit {
     this.ListarImg
   }
   ngOnInit(): void {
+      setTimeout(() => {
+        const notifica = document.querySelector<HTMLDivElement>('.tox-notifications-container');
+        if(notifica){
+          notifica.style.display = "none";
+        }
+      }, 2000);
+
+
 
     this.route.paramMap.subscribe(params => {
       this.id = params.get('id');
@@ -157,8 +165,8 @@ export class CrearProductoComponent implements OnInit {
       return;
     }
 
-    this.prductoForm.value.talla=this.tallasdisponibles
-    if(this.prductoForm.value.talla.length==0){
+    this.prductoForm.value.talla = this.tallasdisponibles
+    if (this.prductoForm.value.talla.length == 0) {
       this.toastr.success('seleccione al menos una talla!!!', 'Cambios no realizados!!!');
       return;
     }
@@ -270,7 +278,7 @@ export class CrearProductoComponent implements OnInit {
           console.log(r)
           this.Producto = r.producto
           this.ListarImg = r.producto.img
-          this.tallasdisponibles=r.producto.talla
+          this.tallasdisponibles = r.producto.talla
           this.prductoForm.setValue({
             nombre: r.producto.nombre,
             categoria: r.producto.categoria,
